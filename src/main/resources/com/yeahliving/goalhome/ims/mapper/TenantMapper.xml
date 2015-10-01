@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yeahliving.goalhome.ims.dao.LandlordMapper">
+
+    <insert id="add" parameterType="com.yeahliving.goalhome.ims.bean.GoHoLandlord" keyProperty="id" useGeneratedKeys="true"
+            flushCache="true">
+        INSERT INTO tenant (tenant_name, age, married, identify, gender, phone, mobile, sec_mobile, email, qq,
+        wechat, hobby, job, buy_intention, pic_url, doc_url, comments)
+        VALUES (#{tenant_name}, #{age}, #{married}, #{identify}, #{gender}, #{phone}, #{mobile}, #{sec_mobile}, #{email}, #{qq},
+        #{wechat}, #{hobby}, #{job}, #{buy_intention}, #{pic_url}, #{doc_url}, #{comments})
+    </insert>
+
+</mapper>

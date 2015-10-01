@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yeahliving.goalhome.ims.dao.AddressMapper">
+    <select id="getByID" parameterType="Integer" resultType="com.yeahliving.goalhome.ims.bean.GoHoAddress">
+        select * from address where id = #{id}
+    </select>
+
+    <resultMap id="addressResult" type="com.yeahliving.goalhome.ims.bean.GoHoAddressContainer" autoMapping="true">
+        <collection property="addresses" javaType="ArrayList" ofType="com.yeahliving.goalhome.ims.bean.GoHoAddress" autoMapping="true"/>
+    </resultMap>
+
+    <select id="searchByStreet" parameterType="java.lang.String" resultMap="addressResult">
+        select * from address where street = #{street}
+    </select>
+
+    <!--<select id="searchByStreet" parameterType="java.lang.String" resultType="com.yeahliving.goalhome.ims.bean.GoHoAddress">-->
+        <!--select * from address where street = #{street}-->
+    <!--</select>-->
+
+    <insert id="add" parameterType="com.yeahliving.goalhome.ims.bean.GoHoAddress" keyProperty="id" useGeneratedKeys="true" flushCache="true">
+        INSERT INTO address (complex, province, city, district, street, door, sub_door, latlon, geohash)
+        VALUES (#{complex,jdbcType=CHAR}, #{province,jdbcType=CHAR}, #{city,jdbcType=CHAR}, #{district,jdbcType=CHAR}, #{street,jdbcType=CHAR},
+                #{door,jdbcType=CHAR}, #{sub_door,jdbcType=CHAR}, #{latlon,jdbcType=CHAR}, #{geohash,jdbcType=CHAR})
+    </insert>
+
+
+</mapper>

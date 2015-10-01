@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yeahliving.goalhome.ims.dao.HouseMapper">
+
+    <!--Define a complete house result which includes address object, landlord object and room objects-->
+    <resultMap id="houseResult" type="com.yeahliving.goalhome.ims.bean.GoHoHouse">
+        <association property="address" column="address_id" javaType="com.yeahliving.goalhome.ims.bean.GoHoAddress"
+                     select="selectAddress"/>
+        <association property="rooms" column="id" javaType="com.yeahliving.goalhome.ims.bean.GoHoRoomContainer" select="selectRooms"/>
+    </resultMap>
+
+    <resultMap id="roomResuts" type="com.yeahliving.goalhome.ims.bean.GoHoRoomContainer" autoMapping="true">
+        <collection property="rooms" javaType="ArrayList" ofType="com.yeahliving.goalhome.ims.bean.GoHoRoom" autoMapping="true"/>
+    </resultMap>
+
+    <select id="selectRooms" parameterType="Integer" resultMap="roomResuts">
+        SELECT * FROM room WHERE house_id = #{id}
+    </select>
+
+    <select id="selectAddress" resultType="com.yeahliving.goalhome.ims.bean.GoHoAddress">
+      SELECT * FROM address WHERE id = #{id}
+    </select>
+
+    <!--Define the container for landlord-->
+    <resultMap id="landlordResults" type="com.yeahliving.goalhome.ims.bean.GoHoLandlordContainer" autoMapping="true">
+        <collection property="landlords" javaType="ArrayList" ofType="com.yeahliving.goalhome.ims.bean.GoHoLandlord" autoMapping="true"/>
+    </resultMap>
+
+    <!--select the landlords by house id-->
+    <select id="selectLandlord" parameterType="Integer" resultMap="landlordResults">
+        SELECT * from landlord WHERE id IN (SELECT landlord_id from house_landlord_relation WHERE house_id = #{id})
+    </select>
+
+    <select id="getByID" parameterType="Integer" resultMap="houseResult">
+                select * from house where id = #{id}
+        </select>
+
+    <resultMap id="houseResults" type="com.yeahliving.goalhome.ims.bean.GoHoHouseContainer" autoMapping="true">
+        <collection property="houses" javaType="ArrayList" ofType="com.yeahliving.goalhome.ims.bean.GoHoHouse" resultMap="houseResult"
+                    autoMapping="true"/>
+    </resultMap>
+
+    <select id="searchByStreet" parameterType="java.lang.String" resultMap="houseResults">
+                select * from house where address_id in (select id from address where street = #{street})
+        </select>
+
+    <insert id="add" parameterType="com.yeahliving.goalhome.ims.bean.GoHoHouse" keyProperty="id" useGeneratedKeys="true"
+            flushCache="true">
+                INSERT INTO house (address_id, alias, house_type, area, status, for_sell, pic_url, doc_url, comments)
+                VALUES (#{address_id}, #{alias}, #{house_type}, #{area}, #{status}, #{for_sell}, #{pic_url}, #{doc_url}, #{comments})
+        </insert>
+
+    <!--<update id="update" parameterType="com.yeahliving.goalhome.ims.bean.GoHoHouse" flushCache="true">-->
+        <!--UPDATE -->
+    <!--</update>-->
+</mapper>

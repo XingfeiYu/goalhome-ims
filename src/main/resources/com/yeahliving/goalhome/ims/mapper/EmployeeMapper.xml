@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yeahliving.goalhome.ims.dao.EmployeeMapper">
+
+    <insert id="add" parameterType="com.yeahliving.goalhome.ims.bean.GoHoEmployee" keyProperty="id" useGeneratedKeys="true"
+            flushCache="true">
+        INSERT INTO employee (employee_name, age, married, identify, gender, phone, mobile, sec_mobile, email, qq,
+        wechat, hobby, address_id, department,job_type,title,supervisor_id ,pic_url, doc_url, comments)
+        VALUES (#{employee_name}, #{age}, #{married}, #{identify}, #{gender}, #{phone}, #{mobile}, #{sec_mobile}, #{email}, #{qq},
+        #{wechat}, #{hobby}, #{address_id}, #{department},#{job_type}, #{title}, #{supervisor_id}, #{pic_url}, #{doc_url}, #{comments})
+    </insert>
+
+</mapper>
