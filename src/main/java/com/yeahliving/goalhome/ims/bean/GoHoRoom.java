@@ -27,13 +27,13 @@ public class GoHoRoom extends GoHoObject {
     private int area = Integer.MIN_VALUE;
 
     @XmlElement(name = "self_br")
-    private int selfBathroom = 0;
+    private int self_br = 0;
 
     @XmlElement(name = "facilities")
     private String facilities = StringUtils.EMPTY;
 
     @XmlElement(name = "pic_url")
-    private String picPaths = StringUtils.EMPTY;
+    private String pic_url = StringUtils.EMPTY;
 
     private String comments = StringUtils.EMPTY;
 
@@ -101,12 +101,12 @@ public class GoHoRoom extends GoHoObject {
         this.area = area;
     }
 
-    public boolean isSelfBathroom() {
-        return this.selfBathroom == 1;
+    public boolean getSelf_br() {
+        return this.self_br == 1;
     }
 
-    public void setSelfBathroom(boolean selfBathroom) {
-        this.selfBathroom = selfBathroom ? 1 : 0;
+    public void setSelf_br(boolean self_br) {
+        this.self_br = self_br ? 1 : 0;
     }
 
     public String getFacilities() {
@@ -117,12 +117,12 @@ public class GoHoRoom extends GoHoObject {
         this.facilities = facilities;
     }
 
-    public String getPicPaths() {
-        return picPaths;
+    public String getPic_url() {
+        return pic_url;
     }
 
-    public void setPicPaths(String picPaths) {
-        this.picPaths = picPaths;
+    public void setPic_url(String pic_url) {
+        this.pic_url = pic_url;
     }
 
     public Timestamp getTstamp() {
@@ -140,5 +140,6 @@ public class GoHoRoom extends GoHoObject {
     public void setComments(String comments) {
         this.comments = comments;
     }
+
 }
 

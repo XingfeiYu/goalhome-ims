@@ -14,8 +14,8 @@ import java.sql.Timestamp;
 @XmlRootElement(name = "address")
 public class GoHoAddress extends GoHoObject {
 
-    @XmlAttribute(name = "id")
-    private int id = Integer.MIN_VALUE;
+//    @XmlAttribute(name = "id")
+//    private int id = Integer.MIN_VALUE;
     /*
     Xiao Qu name
      */
@@ -49,7 +49,7 @@ public class GoHoAddress extends GoHoObject {
     @XmlElement(name = "geohash")
     private String geohash = StringUtils.EMPTY;
 
-    private Timestamp tstamp;
+//    private Timestamp tstamp;
 
     public String getGeohash() {
         return geohash;
@@ -134,21 +134,21 @@ public class GoHoAddress extends GoHoObject {
         this.latlon = latlon;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+//    public void setId(int id) {
+//        this.id = id;
+//    }
+//
+//    public int getId() {
+//        return id;
+//    }
 
-    public int getId() {
-        return id;
-    }
-
-    public Timestamp getTstamp() {
-        return tstamp;
-    }
-
-    public void setTstamp(Timestamp tstamp) {
-        this.tstamp = tstamp;
-    }
+//    public Timestamp getTstamp() {
+//        return tstamp;
+//    }
+//
+//    public void setTstamp(Timestamp tstamp) {
+//        this.tstamp = tstamp;
+//    }
 
     @Override
     protected long getObjIdentify() {

@@ -62,7 +62,7 @@ public class AddressServiceTest {
     @Test
     public void testAddAddress() {
         AddressService.add(address);
-        System.out.println(address.getId());
+//        System.out.println(address.getId());
     }
 
     @Test

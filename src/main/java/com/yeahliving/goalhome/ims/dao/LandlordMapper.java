@@ -15,6 +15,8 @@ public interface LandlordMapper {
 
     public GoHoLandlordContainer searchByName(String name);
 
+    public GoHoLandlord searchByIdentify(String identify);
+
     public GoHoLandlordContainer searchByStreet(String street);
 
     public GoHoLandlordContainer searchByDistrict(String district);

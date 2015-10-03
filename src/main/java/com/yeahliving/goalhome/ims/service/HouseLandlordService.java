@@ -1,20 +1,19 @@
 package com.yeahliving.goalhome.ims.service;
 
-import com.yeahliving.goalhome.ims.bean.GoHoRoom;
-import com.yeahliving.goalhome.ims.dao.RoomMapper;
+import com.yeahliving.goalhome.ims.bean.GoHoHouseLandlord;
+import com.yeahliving.goalhome.ims.dao.HouseLandlordMapper;
 import com.yeahliving.goalhome.ims.utils.DBUtils;
 import org.apache.ibatis.session.SqlSession;
 
 /**
- * Created by xingfeiy on 9/30/15.
+ * Created by xingfeiy on 10/1/15.
  */
-public class RoomService {
-
-    public static GoHoRoom add(GoHoRoom room) {
+public class HouseLandlordService {
+    public static GoHoHouseLandlord add(GoHoHouseLandlord houseLandlord) {
         SqlSession sqlSession = DBUtils.getSessionFactory().openSession();
-        RoomMapper mapper = sqlSession.getMapper(RoomMapper.class);
+        HouseLandlordMapper mapper = sqlSession.getMapper(HouseLandlordMapper.class);
         try {
-            mapper.add(room);
+            mapper.add(houseLandlord);
             sqlSession.commit();
         } catch (Exception ex) {
             sqlSession.rollback();
@@ -22,7 +21,6 @@ public class RoomService {
         } finally {
             sqlSession.close();
         }
-        return room;
+        return houseLandlord;
     }
-
 }

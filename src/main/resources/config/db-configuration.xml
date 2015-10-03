@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <typeAliases>
+        <package name="com.yeahliving.goalhome.ims.bean" />
+    </typeAliases>
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="jdbc" />
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver" />
+                <property name="url" value="jdbc:mysql://10.224.79.78:3306/goalhome?useUnicode=true&amp;characterEncoding=UTF-8" />
+                <property name="username" value="writer_test" />
+                <property name="password" value="123456" />
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <mapper resource="com/yeahliving/goalhome/ims/mapper/HouseMapper.xml" />
+        <mapper resource="com/yeahliving/goalhome/ims/mapper/EmployeeLanderMapper.xml" />
+        <mapper resource="com/yeahliving/goalhome/ims/mapper/AddressMapper.xml" />
+        <mapper resource="com/yeahliving/goalhome/ims/mapper/LandlordMapper.xml" />
+        <mapper resource="com/yeahliving/goalhome/ims/mapper/EmployeeMapper.xml" />
+        <mapper resource="com/yeahliving/goalhome/ims/mapper/RoomMapper.xml" />
+        <mapper resource="com/yeahliving/goalhome/ims/mapper/TenantMapper.xml" />
+        <mapper resource="com/yeahliving/goalhome/ims/mapper/HouseLandlordMapper.xml" />
+    </mappers>
+</configuration>

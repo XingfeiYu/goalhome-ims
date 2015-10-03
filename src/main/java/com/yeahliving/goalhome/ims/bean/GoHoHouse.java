@@ -17,8 +17,8 @@ public class GoHoHouse extends GoHoObject {
     @XmlAttribute(name = "id")
     private int id = Integer.MIN_VALUE;
 
-    @XmlElement(name = "address_id")
-    private int address_id = Integer.MIN_VALUE;
+//    @XmlElement(name = "address_id")
+//    private int address_id = Integer.MIN_VALUE;
 
     @XmlElement(name = "address")
     private GoHoAddress address = new GoHoAddress();
@@ -63,13 +63,13 @@ public class GoHoHouse extends GoHoObject {
 
     //    @XmlElementWrapper(name = "rooms")
     @XmlElement(name = "rooms")
-    private List<GoHoRoom> rooms = new ArrayList<GoHoRoom>();
+    private GoHoRoomContainer rooms;
 
 //    @XmlElement(name = "room_ids")
 //    private String room_ids = StringUtils.EMPTY;
 
-    @XmlElement(name = "landlord")
-    private GoHoLandlord landlord;
+    @XmlElement(name = "landlords")
+    private GoHoLandlordContainer landlords;
 
 
 //    public String getRoom_ids() {
@@ -105,13 +105,13 @@ public class GoHoHouse extends GoHoObject {
         this.alias = alias;
     }
 
-    public int getAddress_id() {
-        return address_id;
-    }
-
-    public void setAddress_id(int address_id) {
-        this.address_id = address_id;
-    }
+//    public int getAddress_id() {
+//        return address_id;
+//    }
+//
+//    public void setAddress_id(int address_id) {
+//        this.address_id = address_id;
+//    }
 
 
     public int getID() {
@@ -172,27 +172,27 @@ public class GoHoHouse extends GoHoObject {
         this.address = address;
     }
 
-    public GoHoLandlord getLandlord() {
-        return landlord;
+    public GoHoLandlordContainer getLandlord() {
+        return landlords;
     }
 
-    public void setLandlord(GoHoLandlord landlord) {
-        this.landlord = landlord;
+    public void setLandlord(GoHoLandlordContainer landlord) {
+        this.landlords = landlord;
     }
 
 //    public int getLandlord_id() {
 //        return landlord_id;
 //    }
-
+//
 //    public void setLandlord_id(int landlord_id) {
 //        this.landlord_id = landlord_id;
 //    }
 
-    public List<GoHoRoom> getRooms() {
+    public GoHoRoomContainer getRooms() {
         return rooms;
     }
 
-    public void setRooms(List<GoHoRoom> rooms) {
+    public void setRooms(GoHoRoomContainer rooms) {
         this.rooms = rooms;
     }
 

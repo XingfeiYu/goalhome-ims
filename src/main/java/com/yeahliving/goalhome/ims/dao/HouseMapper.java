@@ -18,7 +18,7 @@ public interface HouseMapper {
 
     public List<GoHoHouse> getAll();
 
-    public GoHoHouse update(GoHoHouse house);
+    public void update(GoHoHouse house);
 
     public boolean delete(GoHoHouse house);
 }

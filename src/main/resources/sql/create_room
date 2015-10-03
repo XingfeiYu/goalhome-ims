@@ -1,0 +1,13 @@
+CREATE TABLE room (
+    id int(4) not null primary key auto_increment,
+    house_id int(4),
+    room_type char(10),
+    status char(10),
+    area int(4),
+    self_br TINYINT default 0,
+    facilities text,
+    pic_url text,
+    comments text,
+    tstamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    deleted TINYINT default 0
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1000000;
