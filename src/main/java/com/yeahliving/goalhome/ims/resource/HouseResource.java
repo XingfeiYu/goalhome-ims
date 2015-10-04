@@ -2,19 +2,13 @@ package com.yeahliving.goalhome.ims.resource;
 
 import com.yeahliving.goalhome.ims.bean.GoHoHouse;
 import com.yeahliving.goalhome.ims.bean.GoHoLandlord;
-import com.yeahliving.goalhome.ims.bean.GoHoObject;
 import com.yeahliving.goalhome.ims.bean.GoHoRoom;
-import com.yeahliving.goalhome.ims.constraint.GoHoObjectExisted;
-import com.yeahliving.goalhome.ims.exception.DBOperateException;
 import com.yeahliving.goalhome.ims.service.HouseService;
 import com.yeahliving.goalhome.ims.service.LandlordService;
 import com.yeahliving.goalhome.ims.service.RoomService;
 import com.yeahliving.goalhome.ims.service.response.GoHoObjActiveResponse;
 
 import javax.validation.Valid;
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.container.ResourceContext;
@@ -43,6 +37,7 @@ public class HouseResource {
      */
     @POST
     @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
     public GoHoObjActiveResponse add(
             @NotNull (message = "{house.empty.means}")
             @Valid final GoHoHouse house) {

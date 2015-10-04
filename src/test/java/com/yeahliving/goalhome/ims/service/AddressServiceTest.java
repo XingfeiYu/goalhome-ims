@@ -43,8 +43,8 @@ public class AddressServiceTest {
         address2 = new GoHoAddress();
         address2.setComplex("天立花园");
         address2.setProvince("四川省");
-        address2.setCity("泸州市");
-        address2.setDistrict("龙马潭区");
+        address2.setCity("泸州");
+        address2.setDistrict("龙马区");
         address2.setStreet("南光路");
         address2.setDoor("888号");
         address2.setSub_door("3栋");
