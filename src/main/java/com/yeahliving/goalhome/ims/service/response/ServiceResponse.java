@@ -4,6 +4,8 @@ package com.yeahliving.goalhome.ims.service.response;
  * Created by xingfeiy on 10/1/15.
  */
 public class ServiceResponse {
+    public ServiceResponse() {}
+
     public ServiceResponse(Status status, String message) {
         this.status = status;
         this.message = message;

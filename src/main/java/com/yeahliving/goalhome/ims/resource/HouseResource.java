@@ -1,21 +1,16 @@
 package com.yeahliving.goalhome.ims.resource;
 
-import com.yeahliving.goalhome.ims.bean.GoHoHouse;
-import com.yeahliving.goalhome.ims.bean.GoHoLandlord;
-import com.yeahliving.goalhome.ims.bean.GoHoRoom;
+import com.yeahliving.goalhome.ims.bean.*;
 import com.yeahliving.goalhome.ims.service.HouseService;
 import com.yeahliving.goalhome.ims.service.LandlordService;
 import com.yeahliving.goalhome.ims.service.RoomService;
-import com.yeahliving.goalhome.ims.service.response.GoHoObjActiveResponse;
+import com.yeahliving.goalhome.ims.service.response.GoHoHouseResponse;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.container.ResourceContext;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Request;
-import javax.ws.rs.core.Response;
+import javax.ws.rs.core.*;
 
 /**
  * Created by xingfeiy on 9/28/15.
@@ -38,13 +33,12 @@ public class HouseResource {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public GoHoObjActiveResponse add(
+    public GoHoHouseResponse add(
             @NotNull (message = "{house.empty.means}")
             @Valid final GoHoHouse house) {
-        GoHoObjActiveResponse response = HouseService.add(house);
-        return response;
-//        return HouseService.add(house);
+        return HouseService.add(house);
     }
+
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)

@@ -41,12 +41,12 @@ public class AddressServiceTest {
         address1.setSub_door("3栋");
 
         address2 = new GoHoAddress();
-        address2.setComplex("天立花园");
-        address2.setProvince("四川省");
+        address2.setComplex("天立");
+        address2.setProvince("四川");
         address2.setCity("泸州");
-        address2.setDistrict("龙马区");
-        address2.setStreet("南光路");
-        address2.setDoor("888号");
+        address2.setDistrict("龙区");
+        address2.setStreet("南路");
+        address2.setDoor("18111号");
         address2.setSub_door("3栋");
 
         address3 = new GoHoAddress();

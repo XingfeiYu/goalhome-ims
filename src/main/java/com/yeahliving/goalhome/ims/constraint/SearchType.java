@@ -13,7 +13,7 @@ import java.lang.annotation.RetentionPolicy;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @NotNull
-@Pattern(regexp = "(street|city|district|complex|province|keywords|available|agent|nearby)")
+@Pattern(regexp = "(street|city|district|complex|province|keywords|available|agent|nearby|all)")
 @ReportAsSingleViolation
 @Constraint(validatedBy = {})
 public @interface SearchType {

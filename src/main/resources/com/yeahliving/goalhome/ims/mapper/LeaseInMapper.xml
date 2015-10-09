@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yeahliving.goalhome.ims.dao.LeaseInMapper">
+
+    <insert id="add" parameterType="com.yeahliving.goalhome.ims.bean.GoHoLeaseIn" keyProperty="id" useGeneratedKeys="true"
+            flushCache="true">
+        INSERT INTO lease_in (lease_start_date, lease_end_date, agent_id, house_id, fee_per_month, deposit, pic_url, doc_url, comments)
+        VALUES (#{lease_start_date}, #{lease_end_date}, #{agent_id}, #{house_id}, #{fee_per_month}, #{deposit}, #{pic_url}, #{doc_url}, #{comments})
+    </insert>
+
+    <update id="update" parameterType="com.yeahliving.goalhome.ims.bean.GoHoLeaseIn" flushCache="true">
+        UPDATE lease_in SET lease_start_date = #{lease_start_date}, lease_end_date = #{lease_end_date},
+        agent_id = #{agent_id}, house_id = #{house_id},fee_per_month = #{fee_per_month},
+        deposit = #{deposit}, pic_url = #{pic_url},doc_url = #{doc_url},comments = #{comments}
+        WHERE id = #{id}
+    </update>
+
+    <select id="selectByID" parameterType="Integer" resultType="com.yeahliving.goalhome.ims.bean.GoHoLeaseIn">
+        SELECT * FROM lease_in WHERE id = #{id} AND opening = 1
+    </select>
+
+    <update id="close" parameterType="Integer" flushCache="true">
+        UPDATE lease_in SET opening = 0 WHERE id = #{id}
+    </update>
+
+    <!--Define the container for landlord-->
+    <resultMap id="LeaseInResults" type="com.yeahliving.goalhome.ims.bean.GoHoObjContainer" autoMapping="true">
+        <collection property="obj" javaType="ArrayList" ofType="com.yeahliving.goalhome.ims.bean.GoHoLeaseIn" autoMapping="true"/>
+    </resultMap>
+
+    <!--parameter is user id-->
+    <select id="myOpeningLease" parameterType="Integer" resultMap="LeaseInResults">
+        SELECT * FROM lease_in WHERE agent_id = #{id} AND opening = 1
+    </select>
+
+    <select id="myAllLease" parameterType="Integer" resultMap="LeaseInResults">
+        SELECT * FROM lease_in WHERE agent_id = #{id}
+    </select>
+
+    <select id="myClosedLease" parameterType="Integer" resultMap="LeaseInResults">
+        SELECT * FROM lease_in WHERE agent_id = #{id} AND opening = 0
+    </select>
+
+    <select id="openingLease" resultMap="LeaseInResults">
+        SELECT * FROM lease_in WHERE opening = 1
+    </select>
+
+    <select id="allLease" resultMap="LeaseInResults">
+        SELECT * FROM lease_in
+    </select>
+
+    <select id="all" resultMap="LeaseInResults">
+        SELECT * FROM lease_in
+        <where>
+            <if test="agent_id > 0">
+                agent_id = #{agent_id}
+            </if>
+            <if test="status == 1">
+                AND opening = 1
+            </if>
+            <if test="status == 0">
+                AND opening = 0
+            </if>
+            <if test="from_date != null and end_date != null">
+                <if test="date_type == 'lease_start_date' and from_date != null and end_date != null">
+                    AND lease_start_date BETWEEN #{from_date,jdbcType=DATE} and #{end_date,jdbcType=DATE}
+                </if>
+                <if test="date_type == 'lease_end_date' and from_date != null and end_date != null">
+                    AND lease_end_date BETWEEN #{from_date,jdbcType=DATE} and #{end_date,jdbcType=DATE}
+                </if>
+            </if>
+        </where>
+
+        <if test="dir == 'DESC'">
+            <if test="date_type == 'lease_start_date'">
+                ORDER BY lease_start_date DESC
+            </if>
+            <if test="date_type == 'lease_end_date'">
+                ORDER BY lease_end_date DESC
+            </if>
+        </if>
+        <if test="dir == 'ASC'">
+            <if test="date_type == 'lease_start_date'">
+                ORDER BY lease_start_date ASC
+            </if>
+            <if test="date_type == 'lease_end_date'">
+                ORDER BY lease_end_date ASC
+            </if>
+        </if>
+
+        <if test="page != null">
+            limit #{page.offset},#{page.pageSize}
+        </if>
+    </select>
+
+    <select id="countAll" resultType="Integer">
+        SELECT COUNT(*) FROM lease_in
+        <where>
+            <if test="agent_id > 0">
+                agent_id = #{agent_id}
+            </if>
+            <if test="status == 1">
+                AND opening = 1
+            </if>
+            <if test="status == 0">
+                AND opening = 0
+            </if>
+            <if test="from_date != null and end_date != null">
+                <if test="date_type == 'lease_start_date' and from_date != null and end_date != null">
+                    AND lease_start_date BETWEEN #{from_date,jdbcType=DATE} and #{end_date,jdbcType=DATE}
+                </if>
+                <if test="date_type == 'lease_end_date' and from_date != null and end_date != null">
+                    AND lease_end_date BETWEEN #{from_date,jdbcType=DATE} and #{end_date,jdbcType=DATE}
+                </if>
+            </if>
+        </where>
+    </select>
+
+    <!--<select id="countAll" resultType="Integer">-->
+        <!--select COUNT (*) from lease_in-->
+
+    <!--</select>-->
+
+    <select id="closedLease" parameterType="Integer" resultMap="LeaseInResults">
+        SELECT * FROM lease_in WHERE opening = 0
+    </select>
+
+    <!--<select id="currentMonthStartLease" resultMap="LeaseInResults">-->
+        <!--SELECT * FROM lease_in WHERE DATETIME_INTERVAL_CODE-->
+    <!--</select>-->
+
+    <select id="dateRangeStartLease" resultMap="LeaseInResults">
+        SELECT * FROM lease_in WHERE lease_start_date BETWEEN #{from_date} and #{end_date}
+    </select>
+
+</mapper>

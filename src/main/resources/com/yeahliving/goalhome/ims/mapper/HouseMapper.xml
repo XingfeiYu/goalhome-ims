@@ -53,8 +53,20 @@
                     autoMapping="true"/>
     </resultMap>
 
-    <select id="searchByStreet" parameterType="java.lang.String" resultMap="houseResults">
-        select * from house where street = #{street}
+    <select id="searchByStreet" resultMap="houseResults">
+        select * from house where street = #{street} limit #{page.offset},#{page.pageSize}
+    </select>
+
+    <select id="countByStreet" parameterType="java.lang.String" resultMap="houseResults">
+        select COUNT (*) from house where street = #{street}
+    </select>
+
+    <select id="searchAll" parameterType="com.yeahliving.goalhome.ims.bean.GoHoPage" resultMap="houseResults">
+        SELECT * FROM house limit #{offset},#{pageSize}
+    </select>
+
+    <select id="countAll" resultType="Integer">
+        SELECT COUNT(*) FROM house
     </select>
 
     <insert id="add" parameterType="com.yeahliving.goalhome.ims.bean.GoHoHouse" keyProperty="id" useGeneratedKeys="true"

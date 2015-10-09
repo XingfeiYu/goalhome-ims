@@ -6,7 +6,7 @@ import com.yeahliving.goalhome.ims.bean.GoHoPropertyStatus;
 import com.yeahliving.goalhome.ims.service.AddressServiceTest;
 import com.yeahliving.goalhome.ims.service.HouseService;
 import com.yeahliving.goalhome.ims.service.LandlordServiceTest;
-import com.yeahliving.goalhome.ims.service.response.GoHoObjActiveResponse;
+import com.yeahliving.goalhome.ims.service.response.GoHoHouseResponse;
 import org.glassfish.jersey.server.validation.ValidationError;
 import org.junit.Test;
 
@@ -79,7 +79,7 @@ public class HouseTest extends ResourceTest {
         final Response response = target.request(MediaType.APPLICATION_JSON_TYPE)
                 .post(Entity.entity(house_3, MediaType.APPLICATION_JSON_TYPE));
 
-//        final GoHoObjActiveResponse objActiveResponse = response.readEntity(GoHoObjActiveResponse.class);
+        final GoHoHouseResponse objActiveResponse = response.readEntity(GoHoHouseResponse.class);
 
 //        assertEquals(500, response.getStatus());
 //        assertTrue(getValidationMessageTemplates(response).contains("{address.already.existed}"));
@@ -175,8 +175,9 @@ public class HouseTest extends ResourceTest {
     public void testSearchByStreet() throws Exception {
         final WebTarget target = target().path("house");
         Response response = target.path("search/street")
-                .queryParam("q", "南光路")
-//                .queryParam("q", "nanguang")
+                .queryParam("q", "南路")
+                .queryParam("page", 1)
+                .queryParam("per_page", 2)
                 .request(MediaType.APPLICATION_JSON_TYPE)
                 .get();
 
@@ -184,6 +185,65 @@ public class HouseTest extends ResourceTest {
 
         GoHoHouseContainer container = response.readEntity(GoHoHouseContainer.class);
         assertTrue(container.getHouses().size() > 0);
+    }
+
+    @Test
+    public void testSearchAll() throws Exception {
+        final WebTarget target = target().path("house");
+        Response response = target.path("search/all")
+                .queryParam("page", 1)
+                .queryParam("per_page", 2)
+                .request(MediaType.APPLICATION_JSON_TYPE)
+                .get();
+
+        assertEquals(200, response.getStatus());
+
+        GoHoHouseContainer container = response.readEntity(GoHoHouseContainer.class);
+        assertTrue(container.getHouses().size() == 2);
+
+        response = target.path("search/all")
+                .queryParam("page", 1)
+                .queryParam("per_page", 5)
+                .request(MediaType.APPLICATION_JSON_TYPE)
+                .get();
+
+        assertEquals(200, response.getStatus());
+
+        container = response.readEntity(GoHoHouseContainer.class);
+        assertTrue(container.getHouses().size() == 5);
+
+        response = target.path("search/all")
+                .queryParam("page", 2)
+                .queryParam("per_page", 5)
+                .request(MediaType.APPLICATION_JSON_TYPE)
+                .get();
+
+        assertEquals(200, response.getStatus());
+
+        container = response.readEntity(GoHoHouseContainer.class);
+        assertTrue(container.getHouses().size() == 5);
+
+        response = target.path("search/all")
+                .queryParam("page", 3)
+                .queryParam("per_page", 5)
+                .request(MediaType.APPLICATION_JSON_TYPE)
+                .get();
+
+        assertEquals(200, response.getStatus());
+
+        container = response.readEntity(GoHoHouseContainer.class);
+        assertTrue(container.getHouses().size() < 5);
+
+        response = target.path("search/all")
+                .queryParam("page", 4)
+                .queryParam("per_page", 5)
+                .request(MediaType.APPLICATION_JSON_TYPE)
+                .get();
+
+        assertEquals(200, response.getStatus());
+
+        container = response.readEntity(GoHoHouseContainer.class);
+        assertTrue(container.getHouses().size() < 5);
     }
 
     private List<ValidationError> getValidationErrorList(final Response response) {

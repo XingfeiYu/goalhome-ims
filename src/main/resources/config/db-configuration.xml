@@ -29,5 +29,6 @@
         <mapper resource="com/yeahliving/goalhome/ims/mapper/RoomMapper.xml" />
         <mapper resource="com/yeahliving/goalhome/ims/mapper/TenantMapper.xml" />
         <mapper resource="com/yeahliving/goalhome/ims/mapper/HouseLandlordMapper.xml" />
+        <mapper resource="com/yeahliving/goalhome/ims/mapper/LeaseInMapper.xml" />
     </mappers>
 </configuration>

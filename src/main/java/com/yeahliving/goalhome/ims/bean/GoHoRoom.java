@@ -32,6 +32,11 @@ public class GoHoRoom extends GoHoObject {
     @XmlElement(name = "facilities")
     private String facilities = StringUtils.EMPTY;
 
+    /*
+    1 - leasable, 0 - unleasable
+     */
+    private int leasable = 1;
+
     @XmlElement(name = "pic_url")
     private String pic_url = StringUtils.EMPTY;
 
@@ -59,6 +64,10 @@ public class GoHoRoom extends GoHoObject {
             }
             return UNKNOWN;
         }
+
+        public static boolean defaultLeasable(TYPE type) {
+            return MASTER.equals(type) || SECOND.equals(type);
+        }
     }
 
     public int getId() {
@@ -83,6 +92,12 @@ public class GoHoRoom extends GoHoObject {
 
     public void setRoom_type(String room_type) {
         this.room_type = room_type;
+        if(StringUtils.equalsIgnoreCase(this.room_type, "master") ||
+                StringUtils.equalsIgnoreCase(this.room_type, "second")) {
+            this.leasable = 1;
+        } else {
+            this.leasable = 0;
+        }
     }
 
     public String getStatus() {
@@ -141,5 +156,12 @@ public class GoHoRoom extends GoHoObject {
         this.comments = comments;
     }
 
+    public int getLeasable() {
+        return leasable;
+    }
+
+    public void setLeasable(int leasable) {
+        this.leasable = leasable;
+    }
 }
 

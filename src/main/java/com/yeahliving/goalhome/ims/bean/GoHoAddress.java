@@ -1,6 +1,5 @@
 package com.yeahliving.goalhome.ims.bean;
 
-import com.yeahliving.goalhome.ims.utils.HashingUtil;
 import org.apache.commons.lang.StringUtils;
 
 import javax.xml.bind.annotation.XmlAttribute;
@@ -150,14 +149,14 @@ public class GoHoAddress extends GoHoObject {
 //        this.tstamp = tstamp;
 //    }
 
-    @Override
-    protected long getObjIdentify() {
-        if(Long.compare(this.objIdentify, 0) == 0) {
-            StringBuilder sb = new StringBuilder().append(this.sub_door).append(";").
-                    append(this.door).append(";").append(this.district).append(";").append(city);
-            this.objIdentify = HashingUtil.encodeMD5(sb.toString().trim());
-        }
-        return this.objIdentify;
-    }
+//    @Override
+//    protected long getObjIdentify() {
+//        if(Long.compare(this.objIdentify, 0) == 0) {
+//            StringBuilder sb = new StringBuilder().append(this.sub_door).append(";").
+//                    append(this.door).append(";").append(this.district).append(";").append(city);
+//            this.objIdentify = HashingUtil.encodeMD5(sb.toString().trim());
+//        }
+//        return this.objIdentify;
+//    }
 }
 
