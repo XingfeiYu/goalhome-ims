@@ -4,10 +4,10 @@ import com.yeahliving.goalhome.ims.bean.GoHoLandlord;
 import com.yeahliving.goalhome.ims.service.LandlordService;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.container.ResourceContext;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -30,4 +30,14 @@ public class LandlordResource {
     ) {
         return LandlordService.add(landlord);
     }
+
+    @Path("/find/{identify}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Max(value = 0, message = "{landlord.already.exist}")
+    public int find(@PathParam("identify") String identify) {
+        return LandlordService.find(identify);
+    }
+
+
 }

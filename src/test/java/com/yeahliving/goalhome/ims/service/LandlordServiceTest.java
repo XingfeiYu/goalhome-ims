@@ -15,7 +15,6 @@ import static org.junit.Assert.assertTrue;
 public class LandlordServiceTest {
     public static final GoHoLandlord landlord1;
     public static final GoHoLandlord landlord2;
-//    public static final GoHoLandlord landlord3;
     static {
         landlord1 = new GoHoLandlord();
         landlord1.setLandlord_name("Bitch");

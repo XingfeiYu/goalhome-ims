@@ -12,4 +12,7 @@
         #{wechat}, #{hobby}, #{job}, #{address_id}, #{bank_account}, #{bank_info}, #{pic_url}, #{doc_url}, #{comments})
     </insert>
 
+    <select id="searchByIdentify" parameterType="java.lang.String" resultType="com.yeahliving.goalhome.ims.bean.GoHoLandlord">
+        SELECT * FROM landlord WHERE identify = #{identify}
+    </select>
 </mapper>

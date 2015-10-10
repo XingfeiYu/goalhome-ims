@@ -2,6 +2,7 @@ package com.yeahliving.goalhome.ims.resource;
 
 import com.yeahliving.goalhome.ims.ServiceApplication;
 import com.yeahliving.goalhome.ims.bean.GoHoEmployeeLander;
+import com.yeahliving.goalhome.ims.service.response.ResponseUtils;
 import org.eclipse.persistence.jaxb.BeanValidationMode;
 import org.eclipse.persistence.jaxb.MarshallerProperties;
 import org.glassfish.jersey.client.ClientConfig;
@@ -29,7 +30,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by xingfeiy on 9/29/15.
  */
-public class EmployeeLanderTest extends JerseyTest {
+public class EmployeeLanderTest extends ResourceTest {
     private static final GoHoEmployeeLander lander_1;
     private static final GoHoEmployeeLander lander_2;
 
@@ -40,32 +41,6 @@ public class EmployeeLanderTest extends JerseyTest {
         lander_2 = new GoHoEmployeeLander();
         lander_2.setUser_name("user_2");
         lander_2.setPassword("password_2");
-    }
-
-    @Override
-    protected Application configure() {
-        enable(TestProperties.LOG_TRAFFIC);
-        enable(TestProperties.DUMP_ENTITY);
-
-        return new ServiceApplication().property(ServerProperties.BV_SEND_ERROR_IN_RESPONSE, true);
-    }
-
-    @Override
-    protected void configureClient(final ClientConfig config) {
-        super.configureClient(config);
-
-        config.register(MoxyJsonFeature.class);
-        // Turn off BV otherwise the entities on client would be validated as well.
-        config.register(new MoxyJsonConfig()
-                .property(MarshallerProperties.BEAN_VALIDATION_MODE, BeanValidationMode.NONE)
-                .resolver());
-    }
-
-    @Override
-    protected URI getBaseUri() {
-        final UriBuilder baseUriBuilder = UriBuilder.fromUri(super.getBaseUri()).path("goalhome-ims");
-        final boolean externalFactoryInUse = getTestContainerFactory() instanceof ExternalTestContainerFactory;
-        return externalFactoryInUse ? baseUriBuilder.path("api").build() : baseUriBuilder.build();
     }
 
     @Test

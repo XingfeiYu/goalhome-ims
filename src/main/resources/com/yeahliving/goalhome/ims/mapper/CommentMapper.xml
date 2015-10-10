@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yeahliving.goalhome.ims.dao.CommentMapper">
+
+    <insert id="add" parameterType="com.yeahliving.goalhome.ims.bean.GoHoComment" keyProperty="id" useGeneratedKeys="true"
+            flushCache="true">
+        INSERT INTO comments (entity_id, entity_code, uid, comments)
+        VALUES ( #{entity_id}, #{entity_code}, #{uid}, #{comments})
+    </insert>
+
+</mapper>

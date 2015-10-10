@@ -1,0 +1,21 @@
+create table house (
+    id serial not null primary key auto_increment,
+    alias char(20),
+    house_type char(20),
+    area int(4),
+    for_sell TINYINT default 0,
+    complex text,
+    province char(20),
+    city char(30),
+    district char(30),
+    street char(40),
+    door char(10),
+    latlon char(20),
+    geohash char(10),
+    pic_url text,
+    doc_url text,
+    comments text,
+    tstamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    deleted TINYINT default 0,
+    CONSTRAINT uc_address UNIQUE (province,city,district,street,door)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=100000;

@@ -22,7 +22,9 @@ public enum GoHoHouseSearchType {
 
     SEARCH_BY_AGENT("agent"),
 
-    SEARCH_NEAR_BY("nearby");
+    SEARCH_NEAR_BY("nearby"),
+
+    ALL("all");
 
     private String value = StringUtils.EMPTY;
 

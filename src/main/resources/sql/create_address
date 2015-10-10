@@ -1,0 +1,14 @@
+CREATE TABLE address (
+    id int(4) not null primary key auto_increment,
+    complex text,
+    province char(20),
+    city char(30),
+    district char(30),
+    street char(40),
+    door char(10),
+    sub_door char(20),
+    latlon char(20),
+    geohash char(10),
+    tstamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    deleted TINYINT default 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

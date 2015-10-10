@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * Created by xingfeiy on 9/30/15.
  */
 @XmlRootElement(name = "employee")
-public class GoHoEmployee {
+public class GoHoEmployee extends GoHoObject{
     @XmlAttribute(name = "id")
     private int id = Integer.MIN_VALUE;
 

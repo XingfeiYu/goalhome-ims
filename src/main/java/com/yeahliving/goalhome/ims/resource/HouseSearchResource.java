@@ -33,25 +33,14 @@ public class HouseSearchResource {
     @NotNull
 //    @NotEmptySearchField
     public GoHoHouseContainer searchForHouse(
-            @NotBlank(message = "{search.string.empty}") @QueryParam("q") final String searchValue) {
+//            @NotBlank(message = "{search.string.empty}")
+            @QueryParam("q") final String searchValue,
+            @QueryParam("page") final int page,
+            @QueryParam("per_page") final int perPage) {
         GoHoHouseSearchType houseSearchType = GoHoHouseSearchType.parse(searchType);
         if(houseSearchType == null) {
             return null;
         }
-        GoHoHouseContainer container = null;
-        switch (houseSearchType) {
-            case SEARCH_BY_STREET:
-                container = HouseService.searchByStreet(searchValue);
-                break;
-            case SEARCH_BY_CITY:
-                break;
-            case SEARCH_BY_DISTRICT:
-                break;
-            case SEARCH_BY_PROVINCE:
-                break;
-            default:
-                break;
-        }
-        return container;
+        return HouseService.search(houseSearchType, searchValue, page, perPage);
     }
 }

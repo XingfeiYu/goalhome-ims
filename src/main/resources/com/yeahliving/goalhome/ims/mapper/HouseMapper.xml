@@ -6,10 +6,25 @@
 
     <!--Define a complete house result which includes address object, landlord object and room objects-->
     <resultMap id="houseResult" type="com.yeahliving.goalhome.ims.bean.GoHoHouse">
-        <association property="address" column="address_id" javaType="com.yeahliving.goalhome.ims.bean.GoHoAddress"
-                     select="selectAddress"/>
+        <id property="id" column="id"/>
+        <result property="address.complex" column="complex"/>
+        <result property="address.province" column="province"/>
+        <result property="address.city" column="city"/>
+        <result property="address.district" column="district"/>
+        <result property="address.street" column="street"/>
+        <result property="address.door" column="door"/>
+        <result property="address.latlon" column="latlon"/>
+        <result property="address.geohash" column="geohash"/>
+        <!--<association property="address" javaType="com.yeahliving.goalhome.ims.bean.GoHoAddress">-->
+            <!-- -->
+        <!--</association>-->
         <association property="rooms" column="id" javaType="com.yeahliving.goalhome.ims.bean.GoHoRoomContainer" select="selectRooms"/>
+        <association property="landlords" column="id" javaType="com.yeahliving.goalhome.ims.bean.GoHoLandlordContainer" select="selectLandlord"/>
     </resultMap>
+
+    <!--<select id="selectAddress" resultType="com.yeahliving.goalhome.ims.bean.GoHoAddress">-->
+    <!--SELECT * FROM address WHERE id = #{id}-->
+    <!--</select>-->
 
     <resultMap id="roomResuts" type="com.yeahliving.goalhome.ims.bean.GoHoRoomContainer" autoMapping="true">
         <collection property="rooms" javaType="ArrayList" ofType="com.yeahliving.goalhome.ims.bean.GoHoRoom" autoMapping="true"/>
@@ -17,10 +32,6 @@
 
     <select id="selectRooms" parameterType="Integer" resultMap="roomResuts">
         SELECT * FROM room WHERE house_id = #{id}
-    </select>
-
-    <select id="selectAddress" resultType="com.yeahliving.goalhome.ims.bean.GoHoAddress">
-      SELECT * FROM address WHERE id = #{id}
     </select>
 
     <!--Define the container for landlord-->
@@ -34,25 +45,44 @@
     </select>
 
     <select id="getByID" parameterType="Integer" resultMap="houseResult">
-                select * from house where id = #{id}
-        </select>
+        select * from house where id = #{id}
+    </select>
 
     <resultMap id="houseResults" type="com.yeahliving.goalhome.ims.bean.GoHoHouseContainer" autoMapping="true">
         <collection property="houses" javaType="ArrayList" ofType="com.yeahliving.goalhome.ims.bean.GoHoHouse" resultMap="houseResult"
                     autoMapping="true"/>
     </resultMap>
 
-    <select id="searchByStreet" parameterType="java.lang.String" resultMap="houseResults">
-                select * from house where address_id in (select id from address where street = #{street})
-        </select>
+    <select id="searchByStreet" resultMap="houseResults">
+        select * from house where street = #{street} limit #{page.offset},#{page.pageSize}
+    </select>
+
+    <select id="countByStreet" parameterType="java.lang.String" resultMap="houseResults">
+        select COUNT (*) from house where street = #{street}
+    </select>
+
+    <select id="searchAll" parameterType="com.yeahliving.goalhome.ims.bean.GoHoPage" resultMap="houseResults">
+        SELECT * FROM house limit #{offset},#{pageSize}
+    </select>
+
+    <select id="countAll" resultType="Integer">
+        SELECT COUNT(*) FROM house
+    </select>
 
     <insert id="add" parameterType="com.yeahliving.goalhome.ims.bean.GoHoHouse" keyProperty="id" useGeneratedKeys="true"
             flushCache="true">
-                INSERT INTO house (address_id, alias, house_type, area, status, for_sell, pic_url, doc_url, comments)
-                VALUES (#{address_id}, #{alias}, #{house_type}, #{area}, #{status}, #{for_sell}, #{pic_url}, #{doc_url}, #{comments})
+                INSERT INTO house (alias, house_type, area, for_sell,
+                complex, province, city, district, street, door, latlon, geohash, pic_url, doc_url, comments)
+                VALUES (#{alias}, #{house_type}, #{area}, #{for_sell}, #{address.complex},
+                 #{address.province}, #{address.city}, #{address.district}, #{address.street}, #{address.door}, #{address.latlon},
+                 #{address.geohash}, #{pic_url}, #{doc_url}, #{comments})
         </insert>
 
-    <!--<update id="update" parameterType="com.yeahliving.goalhome.ims.bean.GoHoHouse" flushCache="true">-->
-        <!--UPDATE -->
-    <!--</update>-->
+    <update id="update" parameterType="com.yeahliving.goalhome.ims.bean.GoHoHouse" flushCache="true">
+        UPDATE house SET alias = #{alias}, house_type = #{house_type}, area = #{area},
+        for_sell = #{for_sell}, complex = #{address.complex}, province = #{address.province},
+        city = #{address.city}, district = #{address.district}, street = #{address.street}, door = #{address.door},
+        latlon = #{address.latlon}, geohash = #{address.geohash},
+        pic_url = #{pic_url}, doc_url = #{doc_url}, comments = #{comments} WHERE id = #{id}
+    </update>
 </mapper>

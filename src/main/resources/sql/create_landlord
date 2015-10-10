@@ -1,0 +1,27 @@
+CREATE TABLE landlord (
+    id int(4) not null primary key auto_increment,
+    landlord_name char(20),
+    age int(4),
+    married TINYINT default 0,
+    identify char(20),
+    gender TINYINT default 0,
+    phone char(20),
+    mobile char(20),
+    sec_mobile char(20),
+    email char(20),
+    qq char(20),
+    wechat char(20),
+    hobby text,
+    job char(20),
+    address_id int(4),
+    bank_account char(20),
+    bank_info text,
+    pic_url text,
+    doc_url text,
+    comments text,
+    tstamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    deleted TINYINT default 0
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=60000000;
+
+ALTER TABLE landlord
+ADD UNIQUE INDEX  identify_unique (identify ASC) ;
