@@ -44,8 +44,8 @@ public class GoHoHouse extends GoHoObject {
 //    @XmlElement(name = "history_landlords")
 //    private List<Integer> historyLandlords = new ArrayList<Integer>();
 
-    @XmlElement(name = "status")
-    private String status = StringUtils.EMPTY;
+//    @XmlElement(name = "status")
+//    private String status = StringUtils.EMPTY;
 
     private GoHoPropertyStatus gohoStatus = GoHoPropertyStatus.PENDING;
 
@@ -159,10 +159,10 @@ public class GoHoHouse extends GoHoObject {
         return gohoStatus;
     }
 
-    public void setGohoStatus(GoHoPropertyStatus gohoStatus) {
-        this.gohoStatus = gohoStatus;
-        this.status = gohoStatus.name();
-    }
+//    public void setGohoStatus(GoHoPropertyStatus gohoStatus) {
+//        this.gohoStatus = gohoStatus;
+//        this.status = gohoStatus.name();
+//    }
 
     public GoHoAddress getAddress() {
         return address;
@@ -196,14 +196,15 @@ public class GoHoHouse extends GoHoObject {
         this.rooms = rooms;
     }
 
-    public String getStatus() {
-        return status;
-    }
+//    public String getStatus() {
+//        return status;
+//    }
+//
+//    public void setStatus(String status) {
+//        this.status = status;
+////        gohoStatus = GoHoPropertyStatus.parse(status);
+//    }
 
-    public void setStatus(String status) {
-        this.status = status;
-//        gohoStatus = GoHoPropertyStatus.parse(status);
-    }
 
     public String getPic_url() {
         return pic_url;

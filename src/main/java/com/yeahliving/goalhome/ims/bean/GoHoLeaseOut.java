@@ -16,9 +16,7 @@ public class GoHoLeaseOut extends GoHoObject {
 
     private Date lease_end_date;
 
-    private int house_id = Integer.MIN_VALUE;
-
-    private int room_id = 0;
+    private int lease_unit_id = Integer.MIN_VALUE;
 
     private int tenant_id = Integer.MIN_VALUE;
 
@@ -64,20 +62,12 @@ public class GoHoLeaseOut extends GoHoObject {
         this.lease_end_date = lease_end_date;
     }
 
-    public int getHouse_id() {
-        return house_id;
+    public int getLease_unit_id() {
+        return lease_unit_id;
     }
 
-    public void setHouse_id(int house_id) {
-        this.house_id = house_id;
-    }
-
-    public int getRoom_id() {
-        return room_id;
-    }
-
-    public void setRoom_id(int room_id) {
-        this.room_id = room_id;
+    public void setLease_unit_id(int lease_unit_id) {
+        this.lease_unit_id = lease_unit_id;
     }
 
     public int getTenant_id() {

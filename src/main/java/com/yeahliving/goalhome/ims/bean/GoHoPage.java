@@ -11,7 +11,7 @@ public class GoHoPage {
 
     private int pageNo = 1;
 
-    private int pageSize = 1;
+    private int pageSize = 10;
 
     private int totalRecord;
 
@@ -27,7 +27,7 @@ public class GoHoPage {
     }
 
     public GoHoPage(int pageSize, int totalRecord) {
-        this.pageSize = pageSize;
+        this.pageSize = pageSize > 0 ? pageSize : this.pageSize;
         this.totalRecord = totalRecord;
     }
 
@@ -36,8 +36,10 @@ public class GoHoPage {
     }
 
     public void setPageNo(int pageNo) {
-        this.pageNo = pageNo;
-        this.setOffset(this.offset);
+        if(pageNo > 0) {
+            this.pageNo = pageNo;
+            this.setOffset(this.offset);
+        }
     }
 
     public int getPageSize() {

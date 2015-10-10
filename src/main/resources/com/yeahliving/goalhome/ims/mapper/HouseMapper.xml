@@ -71,16 +71,16 @@
 
     <insert id="add" parameterType="com.yeahliving.goalhome.ims.bean.GoHoHouse" keyProperty="id" useGeneratedKeys="true"
             flushCache="true">
-                INSERT INTO house (alias, house_type, area, status, for_sell,
+                INSERT INTO house (alias, house_type, area, for_sell,
                 complex, province, city, district, street, door, latlon, geohash, pic_url, doc_url, comments)
-                VALUES (#{alias}, #{house_type}, #{area}, #{status}, #{for_sell}, #{address.complex},
+                VALUES (#{alias}, #{house_type}, #{area}, #{for_sell}, #{address.complex},
                  #{address.province}, #{address.city}, #{address.district}, #{address.street}, #{address.door}, #{address.latlon},
                  #{address.geohash}, #{pic_url}, #{doc_url}, #{comments})
         </insert>
 
     <update id="update" parameterType="com.yeahliving.goalhome.ims.bean.GoHoHouse" flushCache="true">
         UPDATE house SET alias = #{alias}, house_type = #{house_type}, area = #{area},
-        status = #{status}, for_sell = #{for_sell}, complex = #{address.complex}, province = #{address.province},
+        for_sell = #{for_sell}, complex = #{address.complex}, province = #{address.province},
         city = #{address.city}, district = #{address.district}, street = #{address.street}, door = #{address.door},
         latlon = #{address.latlon}, geohash = #{address.geohash},
         pic_url = #{pic_url}, doc_url = #{doc_url}, comments = #{comments} WHERE id = #{id}

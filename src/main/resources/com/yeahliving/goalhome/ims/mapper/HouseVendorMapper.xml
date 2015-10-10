@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yeahliving.goalhome.ims.dao.HouseVendorMapper">
+
+    <insert id="add" parameterType="com.yeahliving.goalhome.ims.bean.GoHoHouseVendor" keyProperty="id" useGeneratedKeys="true"
+            flushCache="true">
+        INSERT INTO house_vendor (house_id, contact, type_code)
+        VALUES (#{house_id}, #{contact}, #{type_code})
+    </insert>
+
+</mapper>

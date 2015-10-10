@@ -1,13 +1,11 @@
 package com.yeahliving.goalhome.ims.resource;
 
-import com.yeahliving.goalhome.ims.bean.GoHoLeaseIn;
-import com.yeahliving.goalhome.ims.bean.GoHoLeaseInContainer;
-import com.yeahliving.goalhome.ims.dao.LeaseInMapper;
-import com.yeahliving.goalhome.ims.service.GoHoObjService;
-import com.yeahliving.goalhome.ims.service.LeaseInService;
-import com.yeahliving.goalhome.ims.service.response.GoHoObjResponse;
-import com.yeahliving.goalhome.ims.service.response.GoHoSearchResponse;
+import com.yeahliving.goalhome.ims.bean.*;
+import com.yeahliving.goalhome.ims.dao.*;
+import com.yeahliving.goalhome.ims.service.*;
+import com.yeahliving.goalhome.ims.service.response.*;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.container.ResourceContext;
@@ -25,16 +23,127 @@ public class LeaseInResource {
     private ResourceContext resourceContext;
 
     /**
-     * Add a new lease in
+     * The first step of lease in is add a house, it's the only way to add a new house.
+     * We can get a house id after added it successfully.
+     * @param house
+     * @return
+     */
+    @Path("house")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public GoHoObjResponse add(
+            @NotNull (message = "{house.empty.means}")
+            @Valid final GoHoHouse house) {
+        return GoHoObjService.add(house, HouseMapper.class);
+    }
+
+    /**
+     * The next step, we are going to add landlord info for the added house.
+     * The house can be status "leasable" only the landlord info is added.
+     * @param houseID
+     * @param landlord
+     * @return
+     */
+    @Path("house/landlord")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public GoHoObjResponse set(@QueryParam("house_id") int houseID,
+                        final GoHoLandlord landlord) {
+        GoHoObjResponse response = GoHoObjService.add(landlord, LandlordMapper.class);
+        if(ServiceResponse.Status.OK.equals(response.getStatus())) {
+            GoHoHouseLandlord houseLandlord = new GoHoHouseLandlord();
+            houseLandlord.setLandlord_id(landlord.getId());
+            houseLandlord.setHouse_id(houseID);
+            HouseLandlordService.add(houseLandlord);
+        }
+        return response;
+    }
+
+    /**
+     * Next, let's add rooms info for the added house.
+     * @param houseID
+     * @param rooms
+     * @return
+     */
+    @Path("house/room")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public GoHoContainerResponse set(@QueryParam("house_id") int houseID,
+                        final GoHoObjContainer rooms) {
+        GoHoContainerResponse response = GoHoObjService.add(rooms, RoomMapper.class);
+        if(ServiceResponse.Status.OK.equals(response.getStatus())) {
+            for(GoHoObject room : rooms.getObj()) {
+                ((GoHoRoom) room).setHouse_id(houseID);
+            }
+        }
+        return response;
+    }
+
+    /**
+     * If the vendor of house is available, add it.
+     * @param houseID
+     * @param vendor
+     * @return
+     */
+    @Path("house/vendor")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public GoHoObjResponse setVendor(@QueryParam("house_id") int houseID,
+                                     final GoHoHouseVendor vendor) {
+        return GoHoObjService.add(vendor, HouseVendorMapper.class);
+    }
+
+//    /**
+//     * add comment if needed.
+//     * @param houseID
+//     * @param comment
+//     * @return
+//     */
+//    @Path("house/{house_id}/comment")
+//    @POST
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public GoHoObjResponse addHouseComment(@PathParam("house_id") int houseID,
+//                                           final GoHoComment comment) {
+//        return GoHoObjService.add(comment, CommentMapper.class);
+//    }
+
+    /**
+     * Last step, input some basic info about the whole lease and finish it.
      * @param leaseIn
      * @return
      */
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public GoHoObjResponse add(final GoHoLeaseIn leaseIn) {
-        return GoHoObjService.add(leaseIn, LeaseInMapper.class);
+    public GoHoObjResponse add(@QueryParam("house_id") int houseID,
+                               final GoHoLeaseIn leaseIn) {
+        GoHoObjResponse response = GoHoObjService.add(leaseIn, LeaseInMapper.class);
+        //make this house to be leasable after the lease in is done.
+        if(ServiceResponse.Status.OK.equals(response.getStatus())) {
+            //todo, use the real user id instead of this fake id.
+            GoHoLeaseUnit unit = new GoHoLeaseUnit(houseID, Test.FAKE_USER_ID_1);
+            GoHoObjResponse unitResponse = GoHoObjService.add(unit, LeaseUnitMapper.class);
+            if(!ServiceResponse.Status.OK.equals(unitResponse.getStatus())) {
+                return new GoHoObjResponse(ServiceResponse.Status.DB_FAILED, ResponseMessage.INSERT_FAILED, leaseIn);
+            }
+        }
+        return response;
     }
+
+//    /**
+//     * add comment if needed.
+//     * @param lease_in_id
+//     * @param comment
+//     * @return
+//     */
+//    @Path("{lease_in_id}/comment")
+//    @POST
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public GoHoObjResponse addLeaseInComment(@PathParam("lease_in_id") int lease_in_id,
+//                                             final GoHoComment comment) {
+//        return GoHoObjService.add(comment, CommentMapper.class);
+//    }
 
     /**
      * Search a lease in by id.
@@ -73,11 +182,11 @@ public class LeaseInResource {
         return LeaseInService.close(id);
     }
 
-    @Path("/search")
+    @Path("/list")
     @GET
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public GoHoSearchResponse search(@QueryParam("id") final int id,
+    public GoHoSearchResponse list(@QueryParam("id") final int id,
                                         @QueryParam("status") final int status,
                                         @QueryParam("page") final int page,
                                         @QueryParam("per_page") final int perPage,

@@ -6,16 +6,15 @@
 
     <insert id="add" parameterType="com.yeahliving.goalhome.ims.bean.GoHoLeaseOut" keyProperty="id" useGeneratedKeys="true"
             flushCache="true">
-        INSERT INTO lease_out (lease_start_date, lease_end_date, house_id, room_id, tenant_id, agent_id, fee_per_month, deposit, first_bill_date,
+        INSERT INTO lease_out (lease_start_date, lease_end_date, lease_unit_id, tenant_id, agent_id, fee_per_month, deposit, first_bill_date,
         bill_period, pic_url, doc_url, comments)
-        VALUES (#{lease_start_date}, #{lease_end_date}, #{house_id}, #{room_id}, #{tenant_id},#{agent_id}, #{fee_per_month}, #{deposit},
+        VALUES (#{lease_start_date}, #{lease_end_date}, #{lease_unit_id}, #{tenant_id},#{agent_id}, #{fee_per_month}, #{deposit},
         #{first_bill_date},#{bill_period},  #{pic_url}, #{doc_url}, #{comments})
     </insert>
 
     <update id="update" parameterType="com.yeahliving.goalhome.ims.bean.GoHoLeaseOut" flushCache="true">
-        UPDATE lease_in SET lease_start_date = #{lease_start_date}, lease_end_date = #{lease_end_date}, house_id = #{house_id},
-        room_id = #{room_id}, tenant_id = #{tenant_id},
-        agent_id = #{agent_id}, fee_per_month = #{fee_per_month},
+        UPDATE lease_in SET lease_start_date = #{lease_start_date}, lease_end_date = #{lease_end_date}, lease_unit_id = #{lease_unit_id},
+        tenant_id = #{tenant_id}, agent_id = #{agent_id}, fee_per_month = #{fee_per_month},
         deposit = #{deposit}, first_bill_date = #{first_bill_date}, bill_period = #{bill_period},
         pic_url = #{pic_url},doc_url = #{doc_url},comments = #{comments}
         WHERE id = #{id}

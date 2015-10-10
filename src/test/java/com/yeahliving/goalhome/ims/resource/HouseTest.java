@@ -36,7 +36,7 @@ public class HouseTest extends ResourceTest {
         house_1.setAlias("川大精品公寓");
         house_1.setHouse_type("两室一厅");
         house_1.setArea(100);
-        house_1.setStatus(GoHoPropertyStatus.PENDING.name());
+//        house_1.setStatus(GoHoPropertyStatus.PENDING.name());
         house_1.setFor_sell(false);
         house_1.setComments("空姐邻居");
 
@@ -45,7 +45,7 @@ public class HouseTest extends ResourceTest {
         house_2.setAlias("九眼桥豪庭");
         house_2.setHouse_type("两室一厅");
         house_2.setArea(160);
-        house_2.setStatus(GoHoPropertyStatus.PENDING.name());
+//        house_2.setStatus(GoHoPropertyStatus.PENDING.name());
         house_2.setFor_sell(true);
         house_2.setComments("隔壁公安局");
 
@@ -54,7 +54,7 @@ public class HouseTest extends ResourceTest {
         house_3.setAlias("天府广场");
         house_3.setHouse_type("两室两厅");
         house_3.setArea(90);
-        house_3.setStatus(GoHoPropertyStatus.LEASING.name());
+//        house_3.setStatus(GoHoPropertyStatus.LEASING.name());
         house_3.setFor_sell(false);
         house_3.setComments("每晚有广场舞");
 
@@ -65,7 +65,7 @@ public class HouseTest extends ResourceTest {
         house_4.setArea(1000);
 //        house_4.setRoom_ids("1,2,3");
 //        house_4.setAgent_id(1);
-        house_4.setStatus(GoHoPropertyStatus.DECORATING.name());
+//        house_4.setStatus(GoHoPropertyStatus.DECORATING.name());
         house_4.setFor_sell(true);
 //        house_4.setLandlord_id(123);
         house_4.setComments("隔壁公安局");

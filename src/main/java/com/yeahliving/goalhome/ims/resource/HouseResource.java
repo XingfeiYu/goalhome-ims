@@ -5,6 +5,7 @@ import com.yeahliving.goalhome.ims.service.HouseService;
 import com.yeahliving.goalhome.ims.service.LandlordService;
 import com.yeahliving.goalhome.ims.service.RoomService;
 import com.yeahliving.goalhome.ims.service.response.GoHoHouseResponse;
+import com.yeahliving.goalhome.ims.service.response.GoHoSearchResponse;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;

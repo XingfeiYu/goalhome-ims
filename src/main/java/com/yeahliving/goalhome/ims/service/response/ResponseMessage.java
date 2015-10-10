@@ -10,4 +10,5 @@ public class ResponseMessage {
     public static final String INSERT_HOUSE_FAILED = "无法录入该房源，请联系管理员。";
     public static final String UPDATE_FAILED = "更新失败，请联系管理员。";
     public static final String SEARCH_FAILED = "查找失败，请联系管理员。";
+    public static final String INSERT_FAILED = "操作失败，请联系管理员。";
 }

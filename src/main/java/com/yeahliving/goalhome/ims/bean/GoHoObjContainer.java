@@ -9,6 +9,13 @@ import java.util.List;
 public class GoHoObjContainer {
     private List<? extends GoHoObject> obj = new ArrayList<>();
 
+    public GoHoObjContainer() {
+    }
+
+    public GoHoObjContainer(List<? extends GoHoObject> obj) {
+        this.obj = obj;
+    }
+
     public List<? extends GoHoObject> getObj() {
         return obj;
     }

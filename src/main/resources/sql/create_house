@@ -3,7 +3,6 @@ create table house (
     alias char(20),
     house_type char(20),
     area int(4),
-    status char(10),
     for_sell TINYINT default 0,
     complex text,
     province char(20),
