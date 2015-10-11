@@ -1,21 +1,31 @@
 package com.yeahliving.goalhome.ims.resource;
 
-import com.yeahliving.goalhome.ims.bean.*;
-import com.yeahliving.goalhome.ims.service.response.GoHoContainerResponse;
-import com.yeahliving.goalhome.ims.service.response.GoHoObjResponse;
-import com.yeahliving.goalhome.ims.service.response.GoHoSearchResponse;
-import com.yeahliving.goalhome.ims.service.response.ServiceResponse;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.List;
 
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.text.SimpleDateFormat;
-import java.util.*;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import org.junit.Test;
+
+import com.yeahliving.goalhome.ims.bean.GoHoEntityStatusCode;
+import com.yeahliving.goalhome.ims.bean.GoHoHouse;
+import com.yeahliving.goalhome.ims.bean.GoHoLandlord;
+import com.yeahliving.goalhome.ims.bean.GoHoLeaseIn;
+import com.yeahliving.goalhome.ims.bean.GoHoObjContainer;
+import com.yeahliving.goalhome.ims.bean.GoHoRoom;
+import com.yeahliving.goalhome.ims.service.response.GoHoContainerResponse;
+import com.yeahliving.goalhome.ims.service.response.GoHoObjResponse;
+import com.yeahliving.goalhome.ims.service.response.GoHoSearchResponse;
+import com.yeahliving.goalhome.ims.service.response.ServiceResponse;
 
 /**
  * Created by xingfeiy on 10/7/15.
@@ -65,7 +75,7 @@ public class LeaseInTest extends ResourceTest  {
 
 //        http://localhost:9998/goalhome-ims/lease_in/house/room?house_id=100005
         //add rooms
-        List<GoHoRoom> rooms = new ArrayList<>();
+        List<GoHoRoom> rooms = new ArrayList<GoHoRoom>();
         rooms.add(TestObjects.room1);
         rooms.add(TestObjects.room2);
         rooms.add(TestObjects.room3);
