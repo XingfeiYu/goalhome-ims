@@ -9,7 +9,7 @@ CREATE TABLE lease_in (
     pic_url text,
     doc_url text,
     comments text,
-    opening TINYINT default 1,
+    event_status_code TINYINT default 1,
     tstamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     deleted TINYINT default 0
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;

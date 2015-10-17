@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yeahliving.goalhome.ims.dao.TenantMapper">
 
-    <insert id="add" parameterType="com.yeahliving.goalhome.ims.bean.GoHoLandlord" keyProperty="id" useGeneratedKeys="true"
+    <insert id="add" parameterType="com.yeahliving.goalhome.ims.bean.GoHoTenant" keyProperty="id" useGeneratedKeys="true"
             flushCache="true">
         INSERT INTO tenant (tenant_name, age, married, identify, gender, phone, mobile, sec_mobile, email, qq,
         wechat, hobby, job, buy_intention, pic_url, doc_url, comments)

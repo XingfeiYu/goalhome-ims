@@ -1,14 +1,8 @@
 package com.yeahliving.goalhome.ims.service;
 
-import com.yeahliving.goalhome.ims.bean.GoHoLeaseInContainer;
-import com.yeahliving.goalhome.ims.bean.GoHoLeaseInSearchType;
-import com.yeahliving.goalhome.ims.bean.GoHoObjContainer;
-import com.yeahliving.goalhome.ims.bean.GoHoPage;
-import com.yeahliving.goalhome.ims.dao.LeaseInMapper;
-import com.yeahliving.goalhome.ims.service.response.GoHoObjResponse;
-import com.yeahliving.goalhome.ims.service.response.GoHoSearchResponse;
-import com.yeahliving.goalhome.ims.service.response.ResponseMessage;
-import com.yeahliving.goalhome.ims.service.response.ServiceResponse;
+import com.yeahliving.goalhome.ims.bean.*;
+import com.yeahliving.goalhome.ims.dao.*;
+import com.yeahliving.goalhome.ims.service.response.*;
 import com.yeahliving.goalhome.ims.utils.DBUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.ibatis.annotations.Param;
@@ -20,6 +14,71 @@ import java.util.Date;
  * Created by xingfeiy on 10/7/15.
  */
 public class LeaseInService {
+
+    public static GoHoObjResponse add(GoHoLeaseInRequest leaseInRequest) {
+        if(leaseInRequest == null || leaseInRequest.getHouse() == null || leaseInRequest.getLeaseIn() == null) {
+            return new GoHoObjResponse(ServiceResponse.Status.ADD_ERROR, ResponseMessage.INSERT_FAILED, null);
+        }
+
+        GoHoObjResponse response;
+        if(leaseInRequest.getLandlord() != null) {
+            response = GoHoObjService.add(leaseInRequest.getLandlord(), LandlordMapper.class);
+            if(!ServiceResponse.Status.OK.equals(response.getStatus())) {
+                return new GoHoObjResponse(ServiceResponse.Status.ADD_ERROR, ResponseMessage.INSERT_FAILED, null);
+            }
+            int landlordId = response.getGoHoObj().getId();
+            leaseInRequest.getHouse().setLandlord_id(landlordId);
+        }
+
+        response = GoHoObjService.add(leaseInRequest.getHouse(), HouseMapper.class);
+        if(!ServiceResponse.Status.OK.equals(response.getStatus())) {
+            return new GoHoObjResponse(ServiceResponse.Status.ADD_ERROR, ResponseMessage.INSERT_FAILED, null);
+        }
+        int houseId = response.getGoHoObj().getId();
+
+        //Add the house into lease unit repository.
+        GoHoLeaseUnit leaseUnit = new GoHoLeaseUnit();
+        leaseUnit.setHouse_id(houseId);
+        leaseUnit.setEntity_id(houseId);
+        leaseUnit.setUnit_type(1);
+        leaseUnit.setAgent_id(leaseInRequest.getLeaseIn().getAgent_id());
+        response = GoHoObjService.add(leaseUnit, LeaseUnitMapper.class);
+        if(!ServiceResponse.Status.OK.equals(response.getStatus())) {
+            return new GoHoObjResponse(ServiceResponse.Status.ADD_ERROR, ResponseMessage.INSERT_FAILED, null);
+        }
+
+        if(leaseInRequest.getRoomContainer() != null) {
+            for(GoHoObject obj : leaseInRequest.getRoomContainer().getObj()) {
+                ((GoHoRoom)obj).setHouse_id(houseId);
+            }
+
+            GoHoContainerResponse containerResponse = GoHoObjService.add(leaseInRequest.getRoomContainer(), RoomMapper.class);
+            if(!ServiceResponse.Status.OK.equals(containerResponse.getStatus())) {
+                return new GoHoObjResponse(ServiceResponse.Status.ADD_ERROR, ResponseMessage.INSERT_FAILED, null);
+            }
+
+            //Add all rooms into lease unit repository.
+            for(GoHoObject obj : leaseInRequest.getRoomContainer().getObj()) {
+                GoHoRoom room = (GoHoRoom)obj;
+                GoHoLeaseUnit roomUnit = new GoHoLeaseUnit();
+                roomUnit.setHouse_id(houseId);
+                roomUnit.setEntity_id(room.getId());
+                roomUnit.setUnit_type(0);
+                roomUnit.setAgent_id(leaseInRequest.getLeaseIn().getAgent_id());
+                response = GoHoObjService.add(roomUnit, LeaseUnitMapper.class);
+                if(!ServiceResponse.Status.OK.equals(response.getStatus())) {
+                    return new GoHoObjResponse(ServiceResponse.Status.ADD_ERROR, ResponseMessage.INSERT_FAILED, null);
+                }
+            }
+        }
+
+        leaseInRequest.getLeaseIn().setHouse_id(houseId);
+        response = GoHoObjService.add(leaseInRequest.getLeaseIn(), LeaseInMapper.class);
+        if(!ServiceResponse.Status.OK.equals(response.getStatus())) {
+            return new GoHoObjResponse(ServiceResponse.Status.ADD_ERROR, ResponseMessage.INSERT_FAILED, null);
+        }
+        return response;
+    }
 
     public static GoHoObjResponse close(int id) {
         SqlSession sqlSession = DBUtils.getSessionFactory().openSession();

@@ -8,11 +8,42 @@
         <collection property="obj" javaType="ArrayList" ofType="com.yeahliving.goalhome.ims.bean.GoHoLeaseUnit" autoMapping="true"/>
     </resultMap>
 
+    <resultMap id="LeaseEntityResults" type="com.yeahliving.goalhome.ims.bean.GoHoObjContainer" autoMapping="true">
+        <collection property="obj" javaType="ArrayList" ofType="com.yeahliving.goalhome.ims.bean.GoHoLeaseEntity"
+                    resultMap="LeaseEntityResult" autoMapping="true"/>
+    </resultMap>
+
+    <resultMap id="LeaseEntityResult" type="com.yeahliving.goalhome.ims.bean.GoHoLeaseEntity">
+        <id property="id" column="id"/>
+        <result property="unit.id" column="id"/>
+        <result property="unit.entity_id" column="entity_id"/>
+        <result property="unit.house_id" column="house_id"/>
+        <result property="unit.fee_per_month" column="fee_per_month"/>
+        <result property="unit.agent_id" column="agent_id"/>
+        <result property="unit.house_overview" column="house_overview"/>
+        <result property="unit.unit_type" column="unit_type"/>
+        <result property="unit.status" column="status"/>
+        <association property="subUnits" column="{house_id = house_id, unit_type = unit_type}" javaType="com.yeahliving.goalhome.ims.bean.GoHoObjContainer" select="selectSubUnits"></association>
+    </resultMap>
+
+    <select id="selectSubUnits" resultMap="LeaseUnitResults">
+        SELECT * FROM lease_unit WHERE house_id = #{house_id} and unit_type = #{unit_type} - 1
+    </select>
+
+    <select id="getByID" parameterType="Integer" resultType="com.yeahliving.goalhome.ims.bean.GoHoLeaseUnit">
+        select * from house where id = #{id}
+    </select>
+
     <insert id="add" parameterType="com.yeahliving.goalhome.ims.bean.GoHoLeaseUnit" keyProperty="id" useGeneratedKeys="true"
             flushCache="true">
-        INSERT INTO lease_unit (entity_id, house_id, agent_id, comments)
-        VALUES ( #{entity_id}, #{house_id}, #{agent_id}, #{comments})
+        INSERT INTO lease_unit (entity_id, house_id, fee_per_month, agent_id, unit_type,house_overview,comments)
+        VALUES ( #{entity_id}, #{house_id}, #{fee_per_month}, #{agent_id}, #{unit_type},#{house_overview}, #{comments})
     </insert>
+
+    <update id="update" parameterType="com.yeahliving.goalhome.ims.bean.GoHoLeaseUnit" flushCache="true">
+        UPDATE lease_unit SET entity_id = #{entity_id}, house_id = #{house_id}, fee_per_month = #{fee_per_month}, agent_id = #{agent_id},
+        unit_type = #{unit_type}, house_overview = #{house_overview} WHERE id = #{id}
+    </update>
 
     <select id="countAll" resultType="Integer">
         SELECT COUNT(*) FROM lease_unit
@@ -29,13 +60,13 @@
         </where>
     </select>
 
-    <select id="all" resultMap="LeaseUnitResults">
+    <select id="all" resultMap="LeaseEntityResults">
         SELECT * FROM lease_unit
         <where>
             <if test="agent_id > 0">
                 agent_id = #{agent_id}
             </if>
-            <if test="unit_type > 0">
+            <if test="unit_type >= 0">
                 AND unit_type = #{unit_type}
             </if>
             <if test="status > 0">

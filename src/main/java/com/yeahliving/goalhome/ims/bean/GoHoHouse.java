@@ -14,11 +14,6 @@ import java.util.List;
  */
 @XmlRootElement(name = "house")
 public class GoHoHouse extends GoHoObject {
-    @XmlAttribute(name = "id")
-    private int id = Integer.MIN_VALUE;
-
-//    @XmlElement(name = "address_id")
-//    private int address_id = Integer.MIN_VALUE;
 
     @XmlElement(name = "address")
     private GoHoAddress address = new GoHoAddress();
@@ -32,20 +27,17 @@ public class GoHoHouse extends GoHoObject {
     @XmlElement(name = "house_type")
     private String house_type;
 
+    private String floor = StringUtils.EMPTY;
+
+    private int landlord_id = Integer.MIN_VALUE;
+
+    private int agent_id = Integer.MIN_VALUE;
+
     @XmlElement(name = "comments")
     private String comments;
 
     @XmlElement(name = "for_sell")
     private int for_sell = 0;
-
-//    @XmlElement(name = "landlord_id")
-//    private int landlord_id = Integer.MIN_VALUE;
-
-//    @XmlElement(name = "history_landlords")
-//    private List<Integer> historyLandlords = new ArrayList<Integer>();
-
-//    @XmlElement(name = "status")
-//    private String status = StringUtils.EMPTY;
 
     private GoHoPropertyStatus gohoStatus = GoHoPropertyStatus.PENDING;
 
@@ -58,36 +50,11 @@ public class GoHoHouse extends GoHoObject {
     @XmlElement(name = "Timestamp")
     private Timestamp tstamp;
 
-//    @XmlElement(name = "agent")
-    private String agent = StringUtils.EMPTY;
-
-    //    @XmlElementWrapper(name = "rooms")
     @XmlElement(name = "rooms")
     private GoHoRoomContainer rooms;
 
-//    @XmlElement(name = "room_ids")
-//    private String room_ids = StringUtils.EMPTY;
-
     @XmlElement(name = "landlords")
     private GoHoLandlordContainer landlords;
-
-
-//    public String getRoom_ids() {
-//        return room_ids;
-//    }
-
-//    public void setRoom_ids(String room_ids) {
-//        this.room_ids = room_ids;
-//    }
-
-
-//    public int getAgent_id() {
-//        return agent_id;
-//    }
-//
-//    public void setAgent_id(int agent_id) {
-//        this.agent_id = agent_id;
-//    }
 
     public Timestamp getTstamp() {
         return tstamp;
@@ -104,24 +71,6 @@ public class GoHoHouse extends GoHoObject {
     public void setAlias(String alias) {
         this.alias = alias;
     }
-
-//    public int getAddress_id() {
-//        return address_id;
-//    }
-//
-//    public void setAddress_id(int address_id) {
-//        this.address_id = address_id;
-//    }
-
-
-    public int getID() {
-        return id;
-    }
-
-    public void setID(int houseID) {
-        this.id = houseID;
-    }
-
 
     public int getArea() {
         return area;
@@ -159,11 +108,6 @@ public class GoHoHouse extends GoHoObject {
         return gohoStatus;
     }
 
-//    public void setGohoStatus(GoHoPropertyStatus gohoStatus) {
-//        this.gohoStatus = gohoStatus;
-//        this.status = gohoStatus.name();
-//    }
-
     public GoHoAddress getAddress() {
         return address;
     }
@@ -180,14 +124,6 @@ public class GoHoHouse extends GoHoObject {
         this.landlords = landlord;
     }
 
-//    public int getLandlord_id() {
-//        return landlord_id;
-//    }
-//
-//    public void setLandlord_id(int landlord_id) {
-//        this.landlord_id = landlord_id;
-//    }
-
     public GoHoRoomContainer getRooms() {
         return rooms;
     }
@@ -195,16 +131,6 @@ public class GoHoHouse extends GoHoObject {
     public void setRooms(GoHoRoomContainer rooms) {
         this.rooms = rooms;
     }
-
-//    public String getStatus() {
-//        return status;
-//    }
-//
-//    public void setStatus(String status) {
-//        this.status = status;
-////        gohoStatus = GoHoPropertyStatus.parse(status);
-//    }
-
 
     public String getPic_url() {
         return pic_url;
@@ -220,5 +146,29 @@ public class GoHoHouse extends GoHoObject {
 
     public void setDoc_url(String doc_url) {
         this.doc_url = doc_url;
+    }
+
+    public String getFloor() {
+        return floor;
+    }
+
+    public void setFloor(String floor) {
+        this.floor = floor;
+    }
+
+    public int getLandlord_id() {
+        return landlord_id;
+    }
+
+    public void setLandlord_id(int landlord_id) {
+        this.landlord_id = landlord_id;
+    }
+
+    public int getAgent_id() {
+        return agent_id;
+    }
+
+    public void setAgent_id(int agent_id) {
+        this.agent_id = agent_id;
     }
 }

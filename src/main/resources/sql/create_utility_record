@@ -1,0 +1,8 @@
+CREATE TABLE utility_record (
+    id int(4) not null primary key auto_increment,
+    water float,
+    gas float,
+    electric float,
+    tstamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    deleted TINYINT default 0
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;

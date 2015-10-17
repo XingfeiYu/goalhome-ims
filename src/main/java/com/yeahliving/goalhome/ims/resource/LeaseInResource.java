@@ -110,25 +110,13 @@ public class LeaseInResource {
 
     /**
      * Last step, input some basic info about the whole lease and finish it.
-     * @param leaseIn
      * @return
      */
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public GoHoObjResponse add(@QueryParam("house_id") int houseID,
-                               final GoHoLeaseIn leaseIn) {
-        GoHoObjResponse response = GoHoObjService.add(leaseIn, LeaseInMapper.class);
-        //make this house to be leasable after the lease in is done.
-        if(ServiceResponse.Status.OK.equals(response.getStatus())) {
-            //todo, use the real user id instead of this fake id.
-            GoHoLeaseUnit unit = new GoHoLeaseUnit(houseID, Test.FAKE_USER_ID_1);
-            GoHoObjResponse unitResponse = GoHoObjService.add(unit, LeaseUnitMapper.class);
-            if(!ServiceResponse.Status.OK.equals(unitResponse.getStatus())) {
-                return new GoHoObjResponse(ServiceResponse.Status.DB_FAILED, ResponseMessage.INSERT_FAILED, leaseIn);
-            }
-        }
-        return response;
+    public GoHoObjResponse add(final GoHoLeaseInRequest request) {
+        return LeaseInService.add(request);
     }
 
 //    /**

@@ -16,7 +16,7 @@ public class ServiceResponse {
     protected String message = "Ok";
 
     public enum Status {
-        OK(202),
+        OK(200),
 
         NOT_FOUND(404),
 
@@ -29,6 +29,10 @@ public class ServiceResponse {
         BAD_REQUEST(400),
 
         DB_FAILED(601),
+
+        ERROR(701),
+
+        ADD_ERROR(710),
 
         CONSTRAINT_VIOLATION(709),
 

@@ -4,8 +4,6 @@ package com.yeahliving.goalhome.ims.bean;
  * Created by xingfeiy on 10/9/15.
  */
 public class GoHoHouseVendor extends GoHoObject{
-    private int id = Integer.MIN_VALUE;
-
     private int house_id = Integer.MIN_VALUE;
 
     private int contact = Integer.MIN_VALUE;
@@ -34,14 +32,6 @@ public class GoHoHouseVendor extends GoHoObject{
 
     public void setType_code(int type_code) {
         this.type_code = type_code;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public enum Type{

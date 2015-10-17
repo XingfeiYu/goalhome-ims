@@ -4,21 +4,11 @@ package com.yeahliving.goalhome.ims.bean;
  * Created by xingfeiy on 10/1/15.
  */
 public class GoHoHouseLandlord extends GoHoObject {
-    private int id = Integer.MIN_VALUE;
-
     private int landlord_id = Integer.MIN_VALUE;
 
     private int house_id = Integer.MIN_VALUE;
 
     private int expired = 0;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public int getLandlord_id() {
         return landlord_id;

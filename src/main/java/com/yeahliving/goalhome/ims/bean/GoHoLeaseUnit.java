@@ -7,8 +7,6 @@ import org.apache.commons.lang.StringUtils;
  */
 public class GoHoLeaseUnit extends GoHoObject {
 
-    private int id = Integer.MIN_VALUE;
-
     /*
     if the unit_type == 1, entity id == house_id.
      */
@@ -16,6 +14,11 @@ public class GoHoLeaseUnit extends GoHoObject {
 
     private int house_id = Integer.MIN_VALUE;
 
+    private String address = StringUtils.EMPTY;
+
+    private float fee_per_month = 0;
+
+    private int disable = 0;
     /*
     1 => house, 0 => room.
      */
@@ -23,7 +26,9 @@ public class GoHoLeaseUnit extends GoHoObject {
 
     private int agent_id = Integer.MIN_VALUE;
 
-    private int status = GoHoEntityStatusCode.LEASABLE.getCode();
+    private int status = GoHoEntityStatusCode.UN_PRICED.getCode();
+
+    private String house_overview = StringUtils.EMPTY;
 
     private String comments = StringUtils.EMPTY;
 
@@ -34,14 +39,6 @@ public class GoHoLeaseUnit extends GoHoObject {
         this.house_id = house_id;
         this.entity_id = house_id;
         this.agent_id = agent_id;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public int getEntity_id() {
@@ -90,5 +87,40 @@ public class GoHoLeaseUnit extends GoHoObject {
 
     public void setComments(String comments) {
         this.comments = comments;
+    }
+
+    public float getFee_per_month() {
+        return fee_per_month;
+    }
+
+    public void setFee_per_month(float fee_per_month) {
+        if(fee_per_month > 0) {
+            this.fee_per_month = fee_per_month;
+            this.status = GoHoEntityStatusCode.LEASABLE.getCode();
+        }
+    }
+
+    public String getHouse_overview() {
+        return house_overview;
+    }
+
+    public void setHouse_overview(String house_overview) {
+        this.house_overview = house_overview;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public int getDisable() {
+        return disable;
+    }
+
+    public void setDisable(int disable) {
+        this.disable = disable;
     }
 }

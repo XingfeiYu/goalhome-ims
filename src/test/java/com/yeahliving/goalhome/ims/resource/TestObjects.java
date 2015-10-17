@@ -192,4 +192,42 @@ public class TestObjects {
         vendor = new GoHoHouseVendor();
 //        vendor.setContact(contact1);
     }
+
+    public static final GoHoTenant tenant;
+    static {
+        tenant = new GoHoTenant();
+        tenant.setTenant_name("方世玉");
+        tenant.setAge(28);
+        tenant.setGender(1);
+        tenant.setEmail("fangshiyu@gmail.com");
+        tenant.setHobby("kongfu");
+        tenant.setIdentify("510404198809091212");
+        tenant.setMobile("13881388111");
+    }
+
+    public static final GoHoUtilityRecord utilityRecord1;
+    public static final GoHoUtilityRecord utilityRecord2;
+    static {
+        utilityRecord1 = new GoHoUtilityRecord();
+        utilityRecord1.setWater(100.5f);
+        utilityRecord1.setGas(2006.7f);
+        utilityRecord1.setElectric(1763.3f);
+
+        utilityRecord2 = new GoHoUtilityRecord();
+        utilityRecord2.setWater(1000.5f);
+        utilityRecord2.setGas(3006.7f);
+        utilityRecord2.setElectric(2763.3f);
+    }
+
+    public static final GoHoLeaseOut leaseOut1;
+    static {
+        leaseOut1 = new GoHoLeaseOut();
+        leaseOut1.setAgent_id(100);
+        leaseOut1.setBill_period(3);
+        leaseOut1.setDeposit(1500);
+        leaseOut1.setFee_per_month(1500);
+        Calendar start = new GregorianCalendar(2015,10,28);
+        leaseOut1.setFirst_bill_date(start.getTime());
+        leaseOut1.setPrepayment(1000);
+    }
 }

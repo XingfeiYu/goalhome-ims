@@ -12,9 +12,6 @@ import java.sql.Timestamp;
  */
 @XmlRootElement(name = "address")
 public class GoHoAddress extends GoHoObject {
-
-//    @XmlAttribute(name = "id")
-//    private int id = Integer.MIN_VALUE;
     /*
     Xiao Qu name
      */
@@ -48,8 +45,6 @@ public class GoHoAddress extends GoHoObject {
     @XmlElement(name = "geohash")
     private String geohash = StringUtils.EMPTY;
 
-//    private Timestamp tstamp;
-
     public String getGeohash() {
         return geohash;
     }
@@ -57,8 +52,6 @@ public class GoHoAddress extends GoHoObject {
     public void setGeohash(String geohash) {
         this.geohash = geohash;
     }
-
-//    private long id = Long.MIN_VALUE;
 
     public String getComplex() {
         return complex;
@@ -133,30 +126,18 @@ public class GoHoAddress extends GoHoObject {
         this.latlon = latlon;
     }
 
-//    public void setId(int id) {
-//        this.id = id;
-//    }
-//
-//    public int getId() {
-//        return id;
-//    }
-
-//    public Timestamp getTstamp() {
-//        return tstamp;
-//    }
-//
-//    public void setTstamp(Timestamp tstamp) {
-//        this.tstamp = tstamp;
-//    }
-
-//    @Override
-//    protected long getObjIdentify() {
-//        if(Long.compare(this.objIdentify, 0) == 0) {
-//            StringBuilder sb = new StringBuilder().append(this.sub_door).append(";").
-//                    append(this.door).append(";").append(this.district).append(";").append(city);
-//            this.objIdentify = HashingUtil.encodeMD5(sb.toString().trim());
-//        }
-//        return this.objIdentify;
-//    }
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder()
+                .append(this.province)
+                .append(this.city)
+                .append(this.district)
+                .append(this.street)
+                .append(this.door);
+        if(StringUtils.isNotBlank(this.complex)) {
+            sb.append("(").append(this.complex).append(")");
+        }
+        return sb.toString().trim();
+    }
 }
 

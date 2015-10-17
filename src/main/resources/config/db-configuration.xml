@@ -32,5 +32,6 @@
         <mapper resource="com/yeahliving/goalhome/ims/mapper/LeaseInMapper.xml" />
         <mapper resource="com/yeahliving/goalhome/ims/mapper/LeaseOutMapper.xml" />
         <mapper resource="com/yeahliving/goalhome/ims/mapper/LeaseUnitMapper.xml" />
+        <mapper resource="com/yeahliving/goalhome/ims/mapper/UtilityRecordMapper.xml" />
     </mappers>
 </configuration>

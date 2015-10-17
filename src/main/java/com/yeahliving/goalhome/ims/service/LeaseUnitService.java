@@ -13,6 +13,7 @@ import org.apache.ibatis.session.SqlSession;
  * Created by xingfeiy on 10/9/15.
  */
 public class LeaseUnitService {
+
     public static GoHoSearchResponse list(int uid, int unit_type, int status, int pageNo, int perPage) {
         SqlSession sqlSession = DBUtils.getSessionFactory().openSession();
         LeaseUnitMapper mapper = sqlSession.getMapper(LeaseUnitMapper.class);
@@ -35,4 +36,5 @@ public class LeaseUnitService {
         }
         return new GoHoSearchResponse(ServiceResponse.Status.OK,ResponseMessage.OK, container);
     }
+
 }

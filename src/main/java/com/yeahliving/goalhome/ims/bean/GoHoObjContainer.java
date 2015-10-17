@@ -1,5 +1,7 @@
 package com.yeahliving.goalhome.ims.bean;
 
+import org.apache.commons.collections.CollectionUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,5 +24,14 @@ public class GoHoObjContainer {
 
     public void setObj(List<? extends GoHoObject> obj) {
         this.obj = obj;
+    }
+
+    public boolean isNotEmpty()
+    {
+        return !isEmpty();
+    }
+
+    public boolean isEmpty() {
+        return CollectionUtils.isEmpty(obj);
     }
 }

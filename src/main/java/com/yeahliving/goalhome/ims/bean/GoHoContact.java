@@ -6,8 +6,6 @@ import org.apache.commons.lang.StringUtils;
  * Created by xingfeiy on 10/9/15.
  */
 public class GoHoContact extends GoHoObject{
-    private int id = Integer.MIN_VALUE;
-
     private String name = StringUtils.EMPTY;
 
     private String phone = StringUtils.EMPTY;
@@ -19,14 +17,6 @@ public class GoHoContact extends GoHoObject{
     private String company = StringUtils.EMPTY;
 
     private String address = StringUtils.EMPTY;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

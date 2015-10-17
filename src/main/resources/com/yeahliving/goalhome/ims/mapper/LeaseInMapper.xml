@@ -17,12 +17,12 @@
         WHERE id = #{id}
     </update>
 
-    <select id="selectByID" parameterType="Integer" resultType="com.yeahliving.goalhome.ims.bean.GoHoLeaseIn">
-        SELECT * FROM lease_in WHERE id = #{id} AND opening = 1
+    <select id="getByID" parameterType="Integer" resultType="com.yeahliving.goalhome.ims.bean.GoHoLeaseIn">
+        SELECT * FROM lease_in WHERE id = #{id} AND event_status_code = 1
     </select>
 
     <update id="close" parameterType="Integer" flushCache="true">
-        UPDATE lease_in SET opening = 0 WHERE id = #{id}
+        UPDATE lease_in SET event_status_code = -1 WHERE id = #{id}
     </update>
 
     <!--Define the container for landlord-->
@@ -32,7 +32,7 @@
 
     <!--parameter is user id-->
     <select id="myOpeningLease" parameterType="Integer" resultMap="LeaseInResults">
-        SELECT * FROM lease_in WHERE agent_id = #{id} AND opening = 1
+        SELECT * FROM lease_in WHERE agent_id = #{id} AND event_status_code = 1
     </select>
 
     <select id="myAllLease" parameterType="Integer" resultMap="LeaseInResults">
@@ -40,11 +40,11 @@
     </select>
 
     <select id="myClosedLease" parameterType="Integer" resultMap="LeaseInResults">
-        SELECT * FROM lease_in WHERE agent_id = #{id} AND opening = 0
+        SELECT * FROM lease_in WHERE agent_id = #{id} AND event_status_code = -1
     </select>
 
     <select id="openingLease" resultMap="LeaseInResults">
-        SELECT * FROM lease_in WHERE opening = 1
+        SELECT * FROM lease_in WHERE event_status_code = 1
     </select>
 
     <select id="allLease" resultMap="LeaseInResults">
@@ -58,10 +58,13 @@
                 agent_id = #{agent_id}
             </if>
             <if test="status == 1">
-                AND opening = 1
+                AND event_status_code = 1
             </if>
             <if test="status == 0">
-                AND opening = 0
+                AND event_status_code = 0
+            </if>
+            <if test="status == -1">
+                AND event_status_code = -1
             </if>
             <if test="from_date != null and end_date != null">
                 <if test="date_type == 'lease_start_date' and from_date != null and end_date != null">
@@ -102,10 +105,13 @@
                 agent_id = #{agent_id}
             </if>
             <if test="status == 1">
-                AND opening = 1
+                AND event_status_code = 1
             </if>
             <if test="status == 0">
-                AND opening = 0
+                AND event_status_code = 0
+            </if>
+            <if test="status == -1">
+                AND event_status_code = -1
             </if>
             <if test="from_date != null and end_date != null">
                 <if test="date_type == 'lease_start_date' and from_date != null and end_date != null">
@@ -124,7 +130,7 @@
     <!--</select>-->
 
     <select id="closedLease" parameterType="Integer" resultMap="LeaseInResults">
-        SELECT * FROM lease_in WHERE opening = 0
+        SELECT * FROM lease_in WHERE event_status_code = -1
     </select>
 
     <!--<select id="currentMonthStartLease" resultMap="LeaseInResults">-->

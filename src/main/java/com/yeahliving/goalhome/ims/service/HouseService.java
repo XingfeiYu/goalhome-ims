@@ -1,10 +1,7 @@
 package com.yeahliving.goalhome.ims.service;
 
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
-import com.yeahliving.goalhome.ims.bean.GoHoHouse;
-import com.yeahliving.goalhome.ims.bean.GoHoHouseContainer;
-import com.yeahliving.goalhome.ims.bean.GoHoHouseSearchType;
-import com.yeahliving.goalhome.ims.bean.GoHoPage;
+import com.yeahliving.goalhome.ims.bean.*;
 import com.yeahliving.goalhome.ims.dao.HouseMapper;
 import com.yeahliving.goalhome.ims.service.response.GoHoHouseResponse;
 import com.yeahliving.goalhome.ims.service.response.ResponseMessage;
@@ -71,6 +68,11 @@ public class HouseService {
         GoHoHouseResponse response = new GoHoHouseResponse(ServiceResponse.Status.OK, ResponseMessage.OK);
         response.setObject(house);
         return response;
+    }
+
+    public static GoHoAddress getAddress(int houseID) {
+        GoHoHouse house = getByID(houseID);
+        return house != null ? house.getAddress() : null;
     }
 
     public static GoHoHouseContainer search(GoHoHouseSearchType searchType, String searchValue, int pageNo, int perPage) {

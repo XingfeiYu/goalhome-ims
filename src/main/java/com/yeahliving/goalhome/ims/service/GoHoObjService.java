@@ -60,6 +60,24 @@ public class GoHoObjService {
         return new GoHoContainerResponse(ServiceResponse.Status.OK, ResponseMessage.OK, container);
     }
 
+    public static GoHoContainerResponse update(GoHoObjContainer container, Class<? extends GoHoObjMapper> mc) {
+        SqlSession sqlSession = DBUtils.getSessionFactory().openSession();
+        GoHoObjMapper mapper = sqlSession.getMapper(mc);
+        try {
+            for(GoHoObject obj : container.getObj()) {
+                mapper.update(obj);
+            }
+            sqlSession.commit();
+        } catch (Exception ex) {
+            sqlSession.rollback();
+            ex.printStackTrace();
+            return new GoHoContainerResponse(ServiceResponse.Status.DB_FAILED, ResponseMessage.UPDATE_FAILED, container);
+        } finally {
+            sqlSession.close();
+        }
+        return new GoHoContainerResponse(ServiceResponse.Status.OK, ResponseMessage.OK, container);
+    }
+
     public static GoHoObjResponse update(GoHoObject obj, Class<? extends GoHoObjMapper> mc) {
         SqlSession sqlSession = DBUtils.getSessionFactory().openSession();
         GoHoObjMapper mapper = sqlSession.getMapper(mc);

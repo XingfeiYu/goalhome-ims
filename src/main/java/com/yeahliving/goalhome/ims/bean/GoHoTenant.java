@@ -10,9 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * Created by xingfeiy on 9/30/15.
  */
 @XmlRootElement(name = "tenant")
-public class GoHoTenant {
-    @XmlAttribute(name = "id")
-    private int id = Integer.MIN_VALUE;
+public class GoHoTenant extends GoHoObject{
 
     @XmlElement(name = "tenant_name")
     private String tenant_name = StringUtils.EMPTY;
@@ -65,14 +63,6 @@ public class GoHoTenant {
 
     @XmlElement(name = "comments")
     private String comments = StringUtils.EMPTY;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getTenant_name() {
         return tenant_name;

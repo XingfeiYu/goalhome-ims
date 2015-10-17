@@ -9,25 +9,13 @@ import javax.xml.bind.annotation.XmlRootElement;
  * Created by xingfeiy on 9/28/15.
  */
 @XmlRootElement(name = "emp_login")
-public class GoHoEmployeeLander {
-
-    @NotNull(message = "ID can't be empty.")
-    private int id = Integer.MIN_VALUE;
+public class GoHoEmployeeLander extends GoHoObject{
 
     private String user_name = StringUtils.EMPTY;
 
     private String password = StringUtils.EMPTY;
 
     private String deleted = StringUtils.EMPTY;
-
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getUser_name() {
         return user_name;

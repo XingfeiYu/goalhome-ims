@@ -8,8 +8,6 @@ import java.sql.Timestamp;
  * Created by xingfeiy on 10/9/15.
  */
 public class GoHoComment extends GoHoObject {
-    private int id = Integer.MIN_VALUE;
-
     private int entity_id = Integer.MIN_VALUE;
 
     private int entity_code = 0;
@@ -19,14 +17,6 @@ public class GoHoComment extends GoHoObject {
     private int uid = Integer.MIN_VALUE;
 
     private Timestamp tstamp;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public int getEntity_id() {
         return entity_id;

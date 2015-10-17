@@ -12,8 +12,6 @@ import java.sql.Timestamp;
  */
 @XmlRootElement(name = "room")
 public class GoHoRoom extends GoHoObject {
-    @XmlAttribute(name = "id")
-    private int id = Integer.MIN_VALUE;
 
     private int house_id = Integer.MIN_VALUE;
 
@@ -68,14 +66,6 @@ public class GoHoRoom extends GoHoObject {
         public static boolean defaultLeasable(TYPE type) {
             return MASTER.equals(type) || SECOND.equals(type);
         }
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public int getHouse_id() {

@@ -39,7 +39,7 @@ public class WholeProcessTest extends ResourceTest {
         //next page, add landlord info.
 
         final GoHoHouseResponse objActiveResponse = response.readEntity(GoHoHouseResponse.class);
-        int houseID = objActiveResponse.getObject().getID();
+        int houseID = objActiveResponse.getObject().getId();
         assertTrue(houseID > 0);
 
         //next page, add landlord info.

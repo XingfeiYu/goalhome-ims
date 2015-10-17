@@ -6,7 +6,7 @@ package com.yeahliving.goalhome.ims.bean;
 public enum GoHoEntityStatusCode {
     LEASABLE(1),  //means this entity is waiting for lease.
 
-    UNLEASABLE(0), //means this entity is valid, but somehow, not available for lease right now, likes in the decorating.
+    UN_PRICED(0), //means this entity is valid, but somehow, not available for lease right now.
 
     OCCUPIED(-1), // means this entity is leasing right now.
 

@@ -10,11 +10,13 @@ import java.util.Date;
  */
 public class GoHoLeaseOut extends GoHoObject {
 
-    private int id = Integer.MIN_VALUE;
-
     private Date lease_start_date;
 
     private Date lease_end_date;
+
+    private int start_utility_record = Integer.MIN_VALUE;
+
+    private int end_utility_record = Integer.MIN_VALUE;
 
     private int lease_unit_id = Integer.MIN_VALUE;
 
@@ -24,6 +26,8 @@ public class GoHoLeaseOut extends GoHoObject {
 
     private float fee_per_month = 0;
 
+    private float prepayment = 0;
+
     private Date first_bill_date;
 
     private int bill_period = 3;
@@ -31,20 +35,12 @@ public class GoHoLeaseOut extends GoHoObject {
     private float deposit = 0;
 
     @XmlElement(name = "pic_url")
-    private String picPaths = StringUtils.EMPTY;
+    private String pic_url = StringUtils.EMPTY;
 
     @XmlElement(name = "doc_url")
     private String doc_url = StringUtils.EMPTY;
 
     private String comments = StringUtils.EMPTY;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public Date getLease_start_date() {
         return lease_start_date;
@@ -118,12 +114,12 @@ public class GoHoLeaseOut extends GoHoObject {
         this.deposit = deposit;
     }
 
-    public String getPicPaths() {
-        return picPaths;
+    public String getPic_url() {
+        return pic_url;
     }
 
-    public void setPicPaths(String picPaths) {
-        this.picPaths = picPaths;
+    public void setPic_url(String pic_url) {
+        this.pic_url = pic_url;
     }
 
     public String getDoc_url() {
@@ -140,5 +136,29 @@ public class GoHoLeaseOut extends GoHoObject {
 
     public void setComments(String comments) {
         this.comments = comments;
+    }
+
+    public float getPrepayment() {
+        return prepayment;
+    }
+
+    public void setPrepayment(float prepayment) {
+        this.prepayment = prepayment;
+    }
+
+    public int getStart_utility_record() {
+        return start_utility_record;
+    }
+
+    public void setStart_utility_record(int start_utility_record) {
+        this.start_utility_record = start_utility_record;
+    }
+
+    public int getEnd_utility_record() {
+        return end_utility_record;
+    }
+
+    public void setEnd_utility_record(int end_utility_record) {
+        this.end_utility_record = end_utility_record;
     }
 }

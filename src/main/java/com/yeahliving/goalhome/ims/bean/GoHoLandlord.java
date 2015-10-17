@@ -12,9 +12,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "landlord")
 public class GoHoLandlord extends GoHoObject {
 
-    @XmlAttribute(name = "id")
-    private int id = Integer.MIN_VALUE;
-
     @XmlElement(name = "landlord_name")
     private String landlord_name = StringUtils.EMPTY;
 
@@ -74,14 +71,6 @@ public class GoHoLandlord extends GoHoObject {
 
     @XmlElement(name = "comments")
     private String comments = StringUtils.EMPTY;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getLandlord_name() {
         return landlord_name;

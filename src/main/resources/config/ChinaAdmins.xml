@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Province name = "四川省">
+    <City name = "成都市">
+        <District name = "">
+        </District>
+    </City>
+    <City name = "泸州市">
+        <District name = "">
+        </District>
+    </City>
+    <City name = "广元市">
+        <District name = "">
+        </District>
+    </City>
+    <City name = "绵阳市">
+        <District name = "">
+        </District>
+    </City>
+    <City name = "南充市">
+        <District name = "">
+        </District>
+    </City>
+    <City name = "巴中市">
+        <District name = "">
+        </District>
+    </City>
+    <City name = "达州市">
+        <District name = "">
+        </District>
+    </City>
+    <City name = "雅安市">
+        <District name = "">
+        </District>
+    </City>
+    <City name = "德阳市">
+        <District name = "">
+        </District>
+    </City>
+    <City name = "遂宁市">
+        <District name = "">
+        </District>
+    </City>
+    <City name = "广安市">
+        <District name = "">
+        </District>
+    </City>
+    <City name = "眉山市">
+        <District name = "">
+        </District>
+    </City>
+    <City name = "资阳市">
+        <District name = "">
+        </District>
+    </City>
+
+</Province>

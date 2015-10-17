@@ -14,7 +14,6 @@ import java.util.Date;
 @XmlRootElement(name="goholeasein")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class GoHoLeaseIn extends GoHoObject {
-    private int id = Integer.MIN_VALUE;
 
     private Date lease_start_date;
 
@@ -32,7 +31,7 @@ public class GoHoLeaseIn extends GoHoObject {
 
     private  float deposit = 0;
 
-    private int opening = 1;
+    private int event_status_code = GoHoEventStatus.PENDING.code;
 
 //    private int deposit_months = 1;
 
@@ -43,14 +42,6 @@ public class GoHoLeaseIn extends GoHoObject {
     private String doc_url = StringUtils.EMPTY;
 
     private String comments = StringUtils.EMPTY;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public Date getLease_start_date() {
         return lease_start_date;
@@ -100,12 +91,12 @@ public class GoHoLeaseIn extends GoHoObject {
         this.deposit = deposit;
     }
 
-    public int getOpening() {
-        return opening;
+    public int getEvent_status_code() {
+        return event_status_code;
     }
 
-    public void setOpening(int opening) {
-        this.opening = opening;
+    public void setEvent_status_code(int event_status_code) {
+        this.event_status_code = event_status_code;
     }
 
     public String getPic_url() {
