@@ -1,31 +1,23 @@
 package com.yeahliving.goalhome.ims.resource;
 
-import com.yeahliving.goalhome.ims.ServiceApplication;
-import com.yeahliving.goalhome.ims.bean.GoHoEmployeeLander;
-import com.yeahliving.goalhome.ims.service.response.ResponseUtils;
-import org.eclipse.persistence.jaxb.BeanValidationMode;
-import org.eclipse.persistence.jaxb.MarshallerProperties;
-import org.glassfish.jersey.client.ClientConfig;
-import org.glassfish.jersey.moxy.json.MoxyJsonConfig;
-import org.glassfish.jersey.moxy.json.MoxyJsonFeature;
-import org.glassfish.jersey.server.ServerProperties;
-import org.glassfish.jersey.server.validation.ValidationError;
-import org.glassfish.jersey.test.JerseyTest;
-import org.glassfish.jersey.test.TestProperties;
-import org.glassfish.jersey.test.external.ExternalTestContainerFactory;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.client.WebTarget;
-import javax.ws.rs.core.*;
-import java.net.URI;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.GenericType;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
+import org.glassfish.jersey.server.validation.ValidationError;
+import org.junit.Test;
+
+import com.yeahliving.goalhome.ims.bean.GoHoEmployeeLander;
 
 /**
  * Created by xingfeiy on 9/29/15.
