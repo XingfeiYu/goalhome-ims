@@ -21,6 +21,11 @@
         SELECT * FROM lease_in WHERE id = #{id} AND event_status_code = 1
     </select>
 
+    <select id="getRichByID" parameterType="Integer" resultType="com.yeahliving.goalhome.ims.bean.GoHoRichLeaseIn">
+
+    </select>
+
+
     <update id="close" parameterType="Integer" flushCache="true">
         UPDATE lease_in SET event_status_code = -1 WHERE id = #{id}
     </update>

@@ -18,16 +18,17 @@
         <!--<association property="address" javaType="com.yeahliving.goalhome.ims.bean.GoHoAddress">-->
             <!-- -->
         <!--</association>-->
-        <association property="rooms" column="id" javaType="com.yeahliving.goalhome.ims.bean.GoHoRoomContainer" select="selectRooms"/>
-        <association property="landlords" column="id" javaType="com.yeahliving.goalhome.ims.bean.GoHoLandlordContainer" select="selectLandlord"/>
+        <association property="rooms" column="id" javaType="com.yeahliving.goalhome.ims.bean.GoHoObjContainer" select="selectRooms"/>
+        <!--<association property="landlord" column="id" javaType="com.yeahliving.goalhome.ims.bean.GoHoLandlord" select="selectLandlord"/>-->
+        <association property="landlord" column="landlord_id" javaType="com.yeahliving.goalhome.ims.bean.GoHoLandlord" select="selectLandlordByID"/>
     </resultMap>
 
     <!--<select id="selectAddress" resultType="com.yeahliving.goalhome.ims.bean.GoHoAddress">-->
     <!--SELECT * FROM address WHERE id = #{id}-->
     <!--</select>-->
 
-    <resultMap id="roomResuts" type="com.yeahliving.goalhome.ims.bean.GoHoRoomContainer" autoMapping="true">
-        <collection property="rooms" javaType="ArrayList" ofType="com.yeahliving.goalhome.ims.bean.GoHoRoom" autoMapping="true"/>
+    <resultMap id="roomResuts" type="com.yeahliving.goalhome.ims.bean.GoHoObjContainer" autoMapping="true">
+        <collection property="obj" javaType="ArrayList" ofType="com.yeahliving.goalhome.ims.bean.GoHoRoom" autoMapping="true"/>
     </resultMap>
 
     <select id="selectRooms" parameterType="Integer" resultMap="roomResuts">
@@ -35,13 +36,17 @@
     </select>
 
     <!--Define the container for landlord-->
-    <resultMap id="landlordResults" type="com.yeahliving.goalhome.ims.bean.GoHoLandlordContainer" autoMapping="true">
-        <collection property="landlords" javaType="ArrayList" ofType="com.yeahliving.goalhome.ims.bean.GoHoLandlord" autoMapping="true"/>
-    </resultMap>
+    <!--<resultMap id="landlordResults" type="com.yeahliving.goalhome.ims.bean.GoHoLandlordContainer" autoMapping="true">-->
+        <!--<collection property="landlords" javaType="ArrayList" ofType="com.yeahliving.goalhome.ims.bean.GoHoLandlord" autoMapping="true"/>-->
+    <!--</resultMap>-->
 
     <!--select the landlords by house id-->
-    <select id="selectLandlord" parameterType="Integer" resultMap="landlordResults">
-        SELECT * from landlord WHERE id IN (SELECT landlord_id from house_landlord_relation WHERE house_id = #{id})
+    <!--<select id="selectLandlord" parameterType="Integer" resultMap="landlordResults">-->
+        <!--SELECT * from landlord WHERE id IN (SELECT landlord_id from house_landlord_relation WHERE house_id = #{id})-->
+    <!--</select>-->
+
+    <select id="selectLandlordByID" parameterType="Integer" resultType="com.yeahliving.goalhome.ims.bean.GoHoLandlord">
+        SELECT * FROM landlord WHERE id = #{id}
     </select>
 
     <select id="getByID" parameterType="Integer" resultMap="houseResult">

@@ -3,15 +3,7 @@ package com.yeahliving.goalhome.ims.bean;
 /**
  * Created by xingfeiy on 10/13/15.
  */
-public class GoHoLeaseInRequest extends GoHoObject{
-    public GoHoLeaseInRequest() {
-    }
-
-    public GoHoLeaseInRequest(GoHoHouse house, GoHoLeaseIn leaseIn) {
-        this.house = house;
-        this.leaseIn = leaseIn;
-    }
-
+public class GoHoRichLeaseIn extends GoHoObject{
     private GoHoHouse house;
 
     private GoHoObjContainer roomContainer;
@@ -21,6 +13,14 @@ public class GoHoLeaseInRequest extends GoHoObject{
     private GoHoHouseVendor houseVendor;
 
     private GoHoLeaseIn leaseIn;
+
+    public GoHoRichLeaseIn() {
+    }
+
+    public GoHoRichLeaseIn(GoHoHouse house, GoHoLeaseIn leaseIn) {
+        this.house = house;
+        this.leaseIn = leaseIn;
+    }
 
     public GoHoHouse getHouse() {
         return house;

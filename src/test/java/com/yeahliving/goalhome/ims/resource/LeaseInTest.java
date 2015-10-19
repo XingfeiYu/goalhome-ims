@@ -1,7 +1,6 @@
 package com.yeahliving.goalhome.ims.resource;
 
 import com.yeahliving.goalhome.ims.bean.*;
-import com.yeahliving.goalhome.ims.service.response.GoHoContainerResponse;
 import com.yeahliving.goalhome.ims.service.response.GoHoObjResponse;
 import com.yeahliving.goalhome.ims.service.response.GoHoSearchResponse;
 import com.yeahliving.goalhome.ims.service.response.ServiceResponse;
@@ -45,7 +44,7 @@ public class LeaseInTest extends ResourceTest  {
         rooms.add(TestObjects.room2);
         rooms.add(TestObjects.room3);
         GoHoObjContainer container = new GoHoObjContainer(rooms);
-        GoHoLeaseInRequest request = new GoHoLeaseInRequest();
+        GoHoRichLeaseIn request = new GoHoRichLeaseIn();
         request.setHouse(TestObjects.house_1);
         request.setLandlord(TestObjects.landlord1);
         request.setRoomContainer(container);
@@ -122,8 +121,13 @@ public class LeaseInTest extends ResourceTest  {
         Response response = target.path("1").request(MediaType.APPLICATION_JSON_TYPE).get();
         assertEquals(200, response.getStatus());
         GoHoObjResponse objResponse = response.readEntity(GoHoObjResponse.class);
-        GoHoLeaseIn leaseIn = (GoHoLeaseIn)objResponse.getGoHoObj();
+        GoHoRichLeaseIn leaseIn = (GoHoRichLeaseIn)objResponse.getGoHoObj();
         assertEquals(ServiceResponse.Status.OK, objResponse.getStatus());
+        GoHoHouse houseInfo = leaseIn.getHouse(); //the info of house;
+        GoHoLeaseIn leaseInInfo = leaseIn.getLeaseIn(); //the info of lease in
+        GoHoLandlord landlordInfo = leaseIn.getLandlord(); // the info of landlord
+        GoHoObjContainer rooms = leaseIn.getRoomContainer(); // the info of rooms
+
     }
 
     @Test

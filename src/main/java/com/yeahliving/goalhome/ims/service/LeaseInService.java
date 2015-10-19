@@ -5,7 +5,6 @@ import com.yeahliving.goalhome.ims.dao.*;
 import com.yeahliving.goalhome.ims.service.response.*;
 import com.yeahliving.goalhome.ims.utils.DBUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 
 import java.util.Date;
@@ -15,7 +14,7 @@ import java.util.Date;
  */
 public class LeaseInService {
 
-    public static GoHoObjResponse add(GoHoLeaseInRequest leaseInRequest) {
+    public static GoHoObjResponse add(GoHoRichLeaseIn leaseInRequest) {
         if(leaseInRequest == null || leaseInRequest.getHouse() == null || leaseInRequest.getLeaseIn() == null) {
             return new GoHoObjResponse(ServiceResponse.Status.ADD_ERROR, ResponseMessage.INSERT_FAILED, null);
         }

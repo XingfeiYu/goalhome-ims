@@ -2,12 +2,9 @@ package com.yeahliving.goalhome.ims.bean;
 
 import org.apache.commons.lang.StringUtils;
 
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by xingfeiy on 9/28/15.
@@ -51,10 +48,10 @@ public class GoHoHouse extends GoHoObject {
     private Timestamp tstamp;
 
     @XmlElement(name = "rooms")
-    private GoHoRoomContainer rooms;
+    private GoHoObjContainer rooms;
 
-    @XmlElement(name = "landlords")
-    private GoHoLandlordContainer landlords;
+    @XmlElement(name = "landlord")
+    private GoHoLandlord landlord;
 
     public Timestamp getTstamp() {
         return tstamp;
@@ -116,19 +113,19 @@ public class GoHoHouse extends GoHoObject {
         this.address = address;
     }
 
-    public GoHoLandlordContainer getLandlord() {
-        return landlords;
+    public GoHoLandlord getLandlord() {
+        return landlord;
     }
 
-    public void setLandlord(GoHoLandlordContainer landlord) {
-        this.landlords = landlord;
+    public void setLandlord(GoHoLandlord landlord) {
+        this.landlord = landlord;
     }
 
-    public GoHoRoomContainer getRooms() {
+    public GoHoObjContainer getRooms() {
         return rooms;
     }
 
-    public void setRooms(GoHoRoomContainer rooms) {
+    public void setRooms(GoHoObjContainer rooms) {
         this.rooms = rooms;
     }
 

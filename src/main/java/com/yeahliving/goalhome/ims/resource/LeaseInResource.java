@@ -115,7 +115,7 @@ public class LeaseInResource {
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public GoHoObjResponse add(final GoHoLeaseInRequest request) {
+    public GoHoObjResponse add(final GoHoRichLeaseIn request) {
         return LeaseInService.add(request);
     }
 
@@ -142,7 +142,24 @@ public class LeaseInResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public GoHoObjResponse get(@PathParam("id") int id) {
-        return GoHoObjService.getByID(id, LeaseInMapper.class);
+        GoHoObjResponse objResponse = GoHoObjService.getByID(id, LeaseInMapper.class);
+        if(!ServiceResponse.Status.OK.equals(objResponse.getStatus())) {
+            return new GoHoObjResponse(ServiceResponse.Status.DB_FAILED, ResponseMessage.SEARCH_FAILED, null);
+        }
+        GoHoLeaseIn leaseIn = (GoHoLeaseIn)objResponse.getGoHoObj();
+        //get house
+        objResponse = GoHoObjService.getByID(leaseIn.getHouse_id(), HouseMapper.class);
+        if(!ServiceResponse.Status.OK.equals(objResponse.getStatus())) {
+            return new GoHoObjResponse(ServiceResponse.Status.DB_FAILED, ResponseMessage.SEARCH_FAILED, null);
+        }
+        GoHoHouse house = (GoHoHouse)objResponse.getGoHoObj();
+
+        GoHoRichLeaseIn richLeaseIn = new GoHoRichLeaseIn();
+        richLeaseIn.setHouse(house);
+        richLeaseIn.setLandlord(house.getLandlord());
+        richLeaseIn.setRoomContainer(house.getRooms());
+
+        return new GoHoObjResponse(ServiceResponse.Status.OK, ResponseMessage.OK, richLeaseIn);
     }
 
     /**

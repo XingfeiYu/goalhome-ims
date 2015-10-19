@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.*;
 @XmlSeeAlso({GoHoLeaseIn.class, GoHoAddress.class, GoHoHouse.class, GoHoHouseLandlord.class,
         GoHoLandlord.class, GoHoEmployee.class, GoHoLeaseOut.class, GoHoRoom.class,
         GoHoLeaseUnit.class, GoHoTenant.class, GoHoUtilityRecord.class, GoHoEmployeeLander.class,
-        GoHoLeaseEntity.class})
+        GoHoLeaseEntity.class, GoHoRichLeaseIn.class})
 public abstract class GoHoObject {
 
     @XmlAttribute(name = "id")
