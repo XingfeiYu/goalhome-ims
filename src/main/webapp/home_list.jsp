@@ -1,3 +1,6 @@
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@page contentType="text/html"%>
+<%@page pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +12,8 @@
 <link
 	href="https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css"
 	rel="stylesheet">
-<link href="css/justified-nav.css" rel="stylesheet">
+<link href="<%=request.getContextPath()%>/css/justified-nav.css"
+	rel="stylesheet">
 </head>
 <body>
 	<div class="container">
@@ -45,39 +49,43 @@
 			<div class="col-lg-2">
 				<h2>filter!</h2>
 				<p class="text-danger">
-					<select class="form-control" name="agent_id"><option
+					<select class="form-control" name="agent_id" id="unit"><option
 							value="">所有房源</option>
 						<option value="100">我的房源</option></select>
 				</p>
 				<p>
-					<select class="form-control" name="unit_type"><option
+					<select class="form-control" name="unit_type" id="unit_type"><option
 							value="">所有</option>
 						<option value="1">整套</option>
 						<option value="0">合租</option></select>
 				</p>
 				<p>
-					<label>金额:</label><p>
-				 <input class="form-control input-sm col-lg-1"
-						type="text" placeholder="From" style="width: 40%"><input
+					<label>金额:</label>
+				<p>
+					<input class="form-control input-sm col-lg-1" type="text"
+						placeholder="From" style="width: 40%" id="from_amt"><input
 						class="form-control input-sm col-lg-1" type="text"
-						placeholder="To" style="width: 40%">
-				</p><p>
+						placeholder="To" style="width: 40%" id="to_amt">
+				</p>
+				<p>
 
-					<a class="btn btn-primary" href="#" role="button">Apply &raquo;</a>
+					<a class="btn btn-primary" href="#" role="button"
+						onclick="filterSearch();">Apply &raquo;</a>
 				</p>
 			</div>
 			<div class="col-lg-6">
 				<h2>房源信息</h2>
 				<div class="row">
 					<div class="col-lg-3">
-						<img src="./img/house-default.jpeg" alt="..."
-							class="img-thumbnail">
+						<img src="<%=request.getContextPath()%>/img/house-default.jpeg"
+							alt="..." class="img-thumbnail">
 					</div>
-					<div class="col-lg-8">四川省成都市人民大道100号</div>
+					<div class="col-lg-8" id="address">四川省成都市人民大道100号</div>
 					<div class="col-lg-8">
-						<div>-1550元/月</div>
-						<div>-待租</div>
-						<a class="btn btn-primary" href="#" role="button">详细信息 &raquo;</a>
+						<div id="price">-1550元/月</div>
+						<div id="status">-待租</div>
+						<a class="btn btn-primary" href="#" role="button"
+							onclick="unitDeail(houseid)">详细信息 &raquo;</a>
 					</div>
 				</div>
 				<p></p>
@@ -106,5 +114,6 @@
 	<script src="https://cdn.bootcss.com/jquery/2.1.4/jquery.min.js"></script>
 	<script
 		src="https://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<script src="<%=request.getContextPath()%>/js/yeah.js"></script>
 </body>
 </html>

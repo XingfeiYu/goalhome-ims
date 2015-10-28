@@ -1,12 +1,14 @@
 package com.yeahliving.goalhome.ims.resource;
 
-import com.yeahliving.goalhome.ims.service.LeaseInService;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
+
 import com.yeahliving.goalhome.ims.service.LeaseUnitService;
 import com.yeahliving.goalhome.ims.service.response.GoHoSearchResponse;
-
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import java.util.Date;
 
 /**
  * Created by xingfeiy on 10/15/15.

@@ -1,9 +1,6 @@
 package com.yeahliving.goalhome.ims.resource;
 
-import java.net.URI;
-
 import javax.ws.rs.core.Application;
-import javax.ws.rs.core.UriBuilder;
 
 import org.eclipse.persistence.jaxb.BeanValidationMode;
 import org.eclipse.persistence.jaxb.MarshallerProperties;
@@ -15,7 +12,6 @@ import org.glassfish.jersey.test.JerseyTest;
 import org.glassfish.jersey.test.TestProperties;
 
 import com.yeahliving.goalhome.ims.ServiceApplication;
-import org.glassfish.jersey.test.external.ExternalTestContainerFactory;
 
 /**
  * Created by xingfeiy on 10/2/15.
@@ -40,12 +36,4 @@ public class ResourceTest extends JerseyTest {
 				.property(MarshallerProperties.BEAN_VALIDATION_MODE, BeanValidationMode.NONE).resolver());
 	}
 
-	@Override
-	protected URI getBaseUri() {
-		final UriBuilder baseUriBuilder = UriBuilder.fromUri(super.getBaseUri()).path("goalhome-ims");
-		 final boolean externalFactoryInUse = getTestContainerFactory()
-		 instanceof ExternalTestContainerFactory;
-		return externalFactoryInUse ? baseUriBuilder.path("api").build() : baseUriBuilder.build();
-
-	}
 }
